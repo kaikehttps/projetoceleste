@@ -70,6 +70,8 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
     (target: string) => {
       if (phaseRef.current === 'leaving') return
       phaseRef.current = 'leaving'
+      // devolve as camadas ao CSS para a animação do mergulho
+      rootRef.current?.querySelectorAll<HTMLElement>('.tc__layer').forEach((l) => (l.style.transform = ''))
       music.setMode('background')
       setPhase('leaving')
       // libera a página por trás: a capa começa a se revelar durante o mergulho
@@ -100,18 +102,22 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [begin, leave])
 
-  // música → luz: graves no brilho do logo e dos raios; 4 faixas no equalizador
+  // música → luz: graves no halo do logo; 4 faixas no equalizador.
+  // Escreve direto nos elementos pequenos (opacity/transform), nunca no pai da cena:
+  // uma variável CSS no pai obriga o navegador a recalcular milhares de elementos por quadro.
   useEffect(() => {
     const el = rootRef.current
     if (!el) return
+    const halo = el.querySelector<HTMLElement>('.title__halo')
+    const bars = [...el.querySelectorAll<HTMLElement>('.title__eq i')]
     let frame = 0
     let beat = 0
     const avg = [0, 0, 0, 0]
-    const last = new Map<string, string>()
-    const put = (k: string, v: string) => {
-      if (last.get(k) === v) return
-      last.set(k, v)
-      el.style.setProperty(k, v)
+    const last: string[] = []
+    const put = (i: number, node: HTMLElement | null | undefined, prop: 'opacity' | 'transform', v: string) => {
+      if (!node || last[i] === v) return
+      last[i] = v
+      node.style[prop] = v
     }
     const loop = () => {
       const b = music.readBands()
@@ -119,28 +125,34 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
       for (let i = 0; i < 4; i++) avg[i] += (b[i] - avg[i]) * 0.03
       const pulse = Math.max(0, Math.min(1, (b[0] - avg[0]) * 6 + 0.15 * (b[0] > 0.05 ? 1 : 0)))
       beat += (pulse - beat) * (pulse > beat ? 0.5 : 0.1)
-      put('--beat', beat.toFixed(2))
+      put(0, halo, 'opacity', (0.45 + beat * 0.3).toFixed(2))
       for (let i = 0; i < 4; i++) {
-        const v = Math.max(0, Math.min(1, (b[i] - avg[i] * 0.7) * 3.2))
-        put(`--b${i}`, v.toFixed(2))
+        const v = Math.max(0.14, Math.min(1, (b[i] - avg[i] * 0.7) * 3.2))
+        put(i + 1, bars[i], 'transform', `scaleY(${v.toFixed(2)})`)
       }
       frame = requestAnimationFrame(loop)
     }
     loop()
     return () => cancelAnimationFrame(frame)
-  }, [])
+  }, [hasMusic])
 
-  // câmera acompanha o mouse de leve (só com ponteiro fino)
+  // câmera acompanha o mouse de leve (só com ponteiro fino): move cada camada direto
   useEffect(() => {
     const el = rootRef.current
     if (!el || touch || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const layers = [...el.querySelectorAll<HTMLElement>('.tc__layer')].map((node) => {
+      const cs = getComputedStyle(node)
+      return { node, px: parseFloat(cs.getPropertyValue('--px')) || 0, py: parseFloat(cs.getPropertyValue('--py')) || 0 }
+    })
     let frame = 0
     const onMove = (e: PointerEvent) => {
-      if (frame) return
+      if (frame || phaseRef.current === 'leaving') return
       frame = requestAnimationFrame(() => {
         frame = 0
-        el.style.setProperty('--mx', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3))
-        el.style.setProperty('--my', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3))
+        if (phaseRef.current === 'leaving') return
+        const mx = (e.clientX / window.innerWidth) * 2 - 1
+        const my = (e.clientY / window.innerHeight) * 2 - 1
+        for (const l of layers) l.node.style.transform = `translate3d(${(-mx * l.px).toFixed(1)}px, ${(-my * l.py).toFixed(1)}px, 0)`
       })
     }
     window.addEventListener('pointermove', onMove)
@@ -192,6 +204,7 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
       <div className="title__ui">
         <div className="title__logo">
           <div className="title__logo-in">
+            <span className="title__halo" aria-hidden="true" />
             <DeadlockLockup className="title__lockup" />
           </div>
         </div>

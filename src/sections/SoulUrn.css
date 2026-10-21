@@ -1,5 +1,4 @@
 .urn {
-  --level: 0;
   position: relative;
   padding-block: var(--section-y);
   overflow: clip;
@@ -21,21 +20,11 @@
 }
 
 .us__vp {
-  opacity: calc(0.75 + var(--level) * 0.6);
+  opacity: 0.85;
 }
 
 .us__ghost {
-  animation: ghost-window 7s ease-in-out infinite;
-}
-
-@keyframes ghost-window {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.65;
-  }
+  opacity: 0.45;
 }
 
 .urn__fog-a {
@@ -85,7 +74,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 calc(var(--level) * 34px) var(--spirit-glow));
   padding-bottom: 0.06em;
 }
 
@@ -204,72 +192,105 @@
   justify-items: center;
 }
 
-.urn__art svg {
+.urn__art-wrap {
+  position: relative;
   width: min(100%, 520px);
+  will-change: transform;
+  animation: urn-float 7s ease-in-out infinite;
+}
+
+.urn__art svg {
+  position: relative;
+  width: 100%;
   height: auto;
   overflow: visible;
+}
+
+/* núcleo de luz verde: acende com a voz (só a opacidade muda) */
+.urn__glow {
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  width: 82%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(214 255 150 / 0.7),
+    rgb(184 227 107 / 0.32) 40%,
+    rgb(216 138 228 / 0.1) 70%,
+    rgb(216 138 228 / 0) 100%
+  );
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* almas em órbita enquanto a Urna fala: anel achatado que gira inteiro */
+.urn__souls {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 88%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%) scaleY(0.24);
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+  pointer-events: none;
+}
+
+.urn[data-playing] .urn__souls {
+  opacity: 1;
+}
+
+.urn__souls-spin {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  animation: souls 8s linear infinite;
+  animation-play-state: paused;
+}
+
+.urn[data-playing] .urn__souls-spin {
+  animation-play-state: running;
+}
+
+.urn__souls i {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0;
+  height: 50%;
+  transform-origin: 50% 100%;
+}
+
+.urn__souls i::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: -14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #eaffc8, rgb(184 227 107 / 0.8) 45%, rgb(184 227 107 / 0) 100%);
 }
 
 .urn__art .art-credit {
   color: var(--ink-3);
 }
 
-.urn-art__float {
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  animation: urn-float 7s ease-in-out infinite;
-}
-
 .urn-art__core {
-  opacity: calc(0.25 + var(--level) * 0.75);
+  opacity: 0.3;
 }
 
-/* brilho sobrenatural em volta da urna, mais forte quando ela fala */
 .urn-art__image {
-  filter: drop-shadow(0 0 calc(6px + var(--level) * 22px) var(--spirit-glow))
-    drop-shadow(0 0 2px rgb(233 184 240 / 0.35)) drop-shadow(0 26px 24px rgb(0 0 0 / 0.45));
+  filter: drop-shadow(0 0 8px var(--spirit-glow)) drop-shadow(0 0 2px rgb(233 184 240 / 0.35))
+    drop-shadow(0 26px 24px rgb(0 0 0 / 0.45));
 }
 
 .urn-art__aura {
-  opacity: calc(0.55 + var(--level) * 0.7);
-}
-
-.urn-art__shadow {
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  animation: urn-shadow 7s ease-in-out infinite;
-}
-
-.urn-art__ring-flow {
-  animation: ring-flow 16s linear infinite;
-}
-
-.urn-art__glyphs path {
-  animation: glyph-float 6s ease-in-out infinite;
-}
-
-.urn-art__souls {
-  opacity: 0;
-  transition: opacity 1s var(--ease-out);
-}
-
-.urn[data-playing] .urn-art__souls {
-  opacity: 1;
-}
-
-/* as almas só orbitam enquanto a Urna fala */
-.urn-art__souls-spin {
-  animation: souls 8s linear infinite;
-  animation-play-state: paused;
-}
-
-.urn[data-playing] .urn-art__souls-spin {
-  animation-play-state: running;
-}
-
-.urn-art__dust circle {
-  transform-box: fill-box;
-  animation: dust 10s ease-in-out infinite;
+  opacity: 0.6;
 }
 
 @keyframes urn-float {
@@ -282,51 +303,9 @@
   }
 }
 
-@keyframes urn-shadow {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.4;
-  }
-  50% {
-    transform: scale(0.86);
-    opacity: 0.28;
-  }
-}
-
-@keyframes ring-flow {
-  to {
-    stroke-dashoffset: -220;
-  }
-}
-
-@keyframes glyph-float {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.45;
-  }
-  50% {
-    transform: translateY(-8px);
-    opacity: 1;
-  }
-}
-
 @keyframes souls {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes dust {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.15;
-  }
-  50% {
-    transform: translate(6px, -16px);
-    opacity: 0.7;
   }
 }
 
@@ -347,7 +326,7 @@
     top: 0;
   }
 
-  .urn__art svg {
+  .urn__art-wrap {
     width: min(78%, 400px);
   }
 

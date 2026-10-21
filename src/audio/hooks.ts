@@ -12,22 +12,24 @@ export function useIsPlaying(ids: string[]) {
 }
 
 /**
- * Escreve o nível da voz (0–1) na variável CSS `--level` do elemento,
- * sem re-renderizar o React. Só reage aos players indicados.
+ * Faz camadas de luz (`selector`) reagirem à voz dos players indicados,
+ * mudando só a opacidade delas — a placa de vídeo resolve sem repintar a cena.
+ * (Uma variável CSS no elemento da seção obrigaria o navegador a recalcular
+ * milhares de elementos dos desenhos a cada quadro.)
  */
-export function useSceneLevel(ref: RefObject<HTMLElement | null>, ids: string[]) {
+export function useVoiceGlow(ref: RefObject<HTMLElement | null>, ids: string[], selector: string, min = 0, max = 1) {
   const key = ids.join('|')
   useEffect(() => {
-    const el = ref.current
-    if (!el) return
+    const root = ref.current
+    if (!root) return
     const own = key.split('|')
-    let last = -1
+    const glows = [...root.querySelectorAll<HTMLElement>(selector)]
+    let last = ''
     return director.onLevel((activeId, level) => {
-      const v = activeId && own.includes(activeId) ? Math.round(level * 1000) / 1000 : 0
-      if (v !== last) {
-        el.style.setProperty('--level', String(v))
-        last = v
-      }
+      const v = (min + (max - min) * (activeId && own.includes(activeId) ? level : 0)).toFixed(3)
+      if (v === last) return
+      last = v
+      for (const g of glows) g.style.opacity = v
     })
-  }, [ref, key])
+  }, [ref, key, selector, min, max])
 }

@@ -3,7 +3,6 @@
  * no claro só fica um pouco mais "fim de tarde".
  */
 .shop {
-  --level: 0;
   --shop-ink: #f7ebe0;
   --shop-ink-2: #cdb7a6;
   --fog: #e9cfb6;
@@ -22,7 +21,7 @@
   background:
     radial-gradient(
       48% 38% at 30% 62%,
-      rgb(240 187 111 / calc(0.14 + var(--level) * 0.16)),
+      rgb(240 187 111 / 0.18),
       transparent 72%
     ),
     linear-gradient(to bottom, var(--bg) 0%, transparent 7%, transparent 90%, var(--bg) 100%),
@@ -91,7 +90,7 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 calc(18px + var(--level) * 40px) rgb(240 187 111 / calc(0.14 + var(--level) * 0.3)));
+  filter: drop-shadow(0 0 22px rgb(240 187 111 / 0.18));
 }
 
 /* ——— Grade: vitrine + texto ——— */
@@ -108,6 +107,31 @@
 .shop__art {
   position: relative;
   margin: clamp(-10rem, -10vw, -3rem) 0 0;
+}
+
+.shop__art-frame {
+  position: relative;
+}
+
+/* centro da lâmpada no desenho: (402, 414) de 1000 × 1040 */
+.shop__lamp {
+  position: absolute;
+  left: 40.2%;
+  top: 39.8%;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 236 200 / 0.75),
+    rgb(240 187 111 / 0.45) 28%,
+    rgb(240 187 111 / 0.12) 60%,
+    rgb(240 187 111 / 0) 100%
+  );
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
 }
 
 .shop__art svg {
@@ -168,23 +192,23 @@
 
 /* luz da loja reagindo à voz */
 .sf__halo {
-  opacity: calc(0.62 + var(--level) * 0.5);
+  opacity: 0.66;
 }
 
 .sf__surge {
-  opacity: calc(var(--level) * 0.6);
+  opacity: 0;
 }
 
 .sf__bulb {
-  opacity: calc(0.82 + var(--level) * 0.18);
+  opacity: 0.85;
 }
 
 .sf__potion {
-  opacity: calc(0.45 + var(--level) * 0.45);
+  opacity: 0.5;
 }
 
 .sf__reflect {
-  opacity: calc(0.75 + var(--level) * 0.5);
+  opacity: 0.8;
 }
 
 .sf__sign {

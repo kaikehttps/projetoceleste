@@ -162,6 +162,10 @@
     position: static;
   }
 
+  .urn__art-wrap {
+    width: auto;
+  }
+
   .urn__art svg {
     width: auto;
     max-width: 100%;

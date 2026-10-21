@@ -6,9 +6,7 @@
 .collection__list {
   border: 1px solid rgb(233 184 240 / 0.2);
   border-radius: 6px;
-  background: rgb(14 10 18 / 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgb(14 10 18 / 0.82);
   overflow: hidden;
 }
 

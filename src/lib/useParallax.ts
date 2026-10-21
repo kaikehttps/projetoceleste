@@ -1,21 +1,32 @@
 import { useEffect, type RefObject } from 'react'
 
+/** Camada que se desloca com a rolagem: `speed` px por px rolado; `fade` a apaga aos poucos. */
+export type ParallaxLayer = { selector: string; speed: number; fade?: number }
+
 /**
- * Escreve em `--sy` quantos pixels o elemento já subiu na tela, para as
- * camadas da cena se deslocarem em velocidades diferentes (via CSS).
- * Só trabalha enquanto o elemento está visível e respeita "reduzir movimento".
+ * Desloca as camadas da cena em velocidades diferentes durante a rolagem.
+ * Escreve `transform`/`opacity` direto em cada camada: a placa de vídeo só
+ * reposiciona o que já está desenhado, sem recalcular nem repintar a cena.
+ * Só trabalha enquanto a cena está visível e respeita "reduzir movimento".
  */
-export function useParallax(ref: RefObject<HTMLElement | null>) {
+export function useParallax(ref: RefObject<HTMLElement | null>, layers: ParallaxLayer[]) {
   useEffect(() => {
-    const el = ref.current
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const root = ref.current
+    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const nodes = layers.flatMap((l) => [...root.querySelectorAll<HTMLElement | SVGElement>(l.selector)].map((node) => ({ node, ...l })))
     let frame = 0
     let visible = true
+    let lastY = -1
     const update = () => {
       frame = 0
-      const r = el.getBoundingClientRect()
-      const y = Math.max(0, Math.min(r.height, -r.top))
-      el.style.setProperty('--sy', y.toFixed(1))
+      const r = root.getBoundingClientRect()
+      const y = Math.round(Math.max(0, Math.min(r.height, -r.top)))
+      if (y === lastY) return
+      lastY = y
+      for (const n of nodes) {
+        n.node.style.transform = y ? `translate3d(0, ${(y * n.speed).toFixed(1)}px, 0)` : ''
+        if (n.fade) n.node.style.opacity = y ? String(Math.max(0, 1 - y / n.fade)) : ''
+      }
     }
     const onScroll = () => {
       if (visible && !frame) frame = requestAnimationFrame(update)
@@ -24,7 +35,7 @@ export function useParallax(ref: RefObject<HTMLElement | null>) {
       visible = e.isIntersecting
       if (visible) onScroll()
     })
-    io.observe(el)
+    io.observe(root)
     window.addEventListener('scroll', onScroll, { passive: true })
     update()
     return () => {
@@ -32,5 +43,5 @@ export function useParallax(ref: RefObject<HTMLElement | null>) {
       window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(frame)
     }
-  }, [ref])
+  }, [ref, layers])
 }

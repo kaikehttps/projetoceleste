@@ -10,9 +10,7 @@
   padding: 0.5rem 0.5rem 0.65rem;
   border: 1px solid var(--line-2);
   border-radius: 14px;
-  background: color-mix(in srgb, var(--bg-2) 88%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--bg-2);
   box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.6);
   transform: translate(-50%, calc(100% + 40px));
   opacity: 0;

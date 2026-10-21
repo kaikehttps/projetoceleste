@@ -6,7 +6,7 @@ import { SkylineLayer } from '../components/art/SkylineLayer'
 import type { SkylineOptions } from '../components/art/skyline'
 import { Star4 } from '../components/art/Star4'
 import { CelesteLogo } from '../components/Logo'
-import { useParallax } from '../lib/useParallax'
+import { useParallax, type ParallaxLayer } from '../lib/useParallax'
 import { site } from '../config'
 import { delay } from '../lib/style'
 import './Hero.css'
@@ -47,9 +47,18 @@ const MID: SkylineOptions = {
   detail: { setback: 0.35, water: 0.32, antenna: 0.12, gothic: 0.05, cornice: 0.6 },
 }
 
+const PARALLAX: ParallaxLayer[] = [
+  { selector: '.hero__stars', speed: 0.55 },
+  { selector: '.hero__moon', speed: 0.42 },
+  { selector: '.hero__far', speed: 0.3 },
+  { selector: '.hero__mid', speed: 0.18 },
+  { selector: '.hero__near', speed: 0.06 },
+  { selector: '.hero__content', speed: -0.12, fade: 900 },
+]
+
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
-  useParallax(ref)
+  useParallax(ref, PARALLAX)
 
   return (
     <section className="hero scene" id="inicio" ref={ref} aria-labelledby="hero-title">

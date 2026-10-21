@@ -135,11 +135,6 @@ function Ledge() {
   return (
     <svg className="tc__ledge-svg" viewBox="0 0 1600 220" preserveAspectRatio="xMidYMax slice">
       <defs>
-        <radialGradient id="tc-soul">
-          <stop offset="0" stopColor="#eaffc8" />
-          <stop offset="0.35" stopColor="var(--spirit)" stopOpacity="0.85" />
-          <stop offset="1" stopColor="var(--spirit)" stopOpacity="0" />
-        </radialGradient>
       </defs>
       <g fill="var(--ledge)">
         <path d="M-20 150H1620V220H-20Z" />
@@ -158,18 +153,17 @@ function Ledge() {
         <path d="M620 150v-26h18v26zM612 124h34v-8h-34z" />
         <path d="M980 150v-18h40v18z" />
       </g>
-      {/* almas flutuando sobre o telhado */}
-      {[
-        [540, 96, 16],
-        [586, 68, 11],
-        [512, 54, 8],
-        [1180, 104, 10],
-      ].map(([x, y, r], i) => (
-        <circle key={i} cx={x} cy={y} r={r * 2.4} fill="url(#tc-soul)" className="tc__soul" style={{ animationDelay: `${i * -1.6}s` }} />
-      ))}
     </svg>
   )
 }
+
+/** Almas sobre o telhado: elementos próprios, flutuam só com transform/opacity. */
+const SOULS = [
+  { left: '33.5%', bottom: '44%', width: '3.2vmin', animationDelay: '0s' },
+  { left: '36.4%', bottom: '58%', width: '2.3vmin', animationDelay: '-1.6s' },
+  { left: '31.8%', bottom: '64%', width: '1.7vmin', animationDelay: '-3.2s' },
+  { left: '73.6%', bottom: '40%', width: '2.1vmin', animationDelay: '-4.8s' },
+]
 
 export function TitleCity() {
   return (
@@ -196,6 +190,9 @@ export function TitleCity() {
       </div>
       <div className="tc__layer tc__ledge">
         <Ledge />
+        {SOULS.map((st, i) => (
+          <span key={i} className="tc__soul" style={st} />
+        ))}
       </div>
       <div className="tc__vignette" />
     </div>

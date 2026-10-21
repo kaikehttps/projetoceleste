@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import { Fog } from '../components/art/Fog'
 import { Storefront } from '../components/art/Storefront'
 import { VoicePlayer } from '../components/player/VoicePlayer'
-import { useSceneLevel } from '../audio/hooks'
+import { useVoiceGlow } from '../audio/hooks'
 import { shopkeeperTrack } from '../data/recordings'
 import { delay } from '../lib/style'
 import './Shopkeeper.css'
@@ -11,7 +11,7 @@ const PLAYER_ID = 'vendedor'
 
 export function Shopkeeper() {
   const ref = useRef<HTMLElement>(null)
-  useSceneLevel(ref, [PLAYER_ID])
+  useVoiceGlow(ref, [PLAYER_ID], '.shop__lamp')
 
   return (
     <section className="shop scene" id="vendedor" ref={ref} aria-labelledby="shop-title">
@@ -37,7 +37,11 @@ export function Shopkeeper() {
 
       <div className="container shop__grid">
         <figure className="shop__art" data-reveal="fade" style={delay(2)}>
-          <Storefront />
+          <div className="shop__art-frame">
+            <Storefront />
+            {/* luz da lâmpada que acende com a voz: camada própria, só muda a opacidade */}
+            <span className="shop__lamp" aria-hidden="true" />
+          </div>
           <figcaption className="art-credit">Ilustração original · não é arte oficial do jogo</figcaption>
         </figure>
 

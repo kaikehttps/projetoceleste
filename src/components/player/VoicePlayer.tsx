@@ -76,13 +76,25 @@ export function VoicePlayer({
   const durationRef = useRef(duration)
   durationRef.current = duration
 
-  // Atualiza o progresso visual direto no DOM (variável --p) e o tempo exibido
-  // só quando o segundo muda — o React não re-renderiza a cada quadro.
-  const paint = useCallback((t: number) => {
-    const d = durationRef.current
-    rootRef.current?.style.setProperty('--p', d > 0 ? String(Math.min(1, t / d)) : '0')
-    setTime((prev) => (Math.floor(prev) === Math.floor(t) ? prev : t))
+  // Progresso visual: escreve --p só nos dois elementos que o usam (parte já ouvida
+  // da waveform e a linha de posição), não no player inteiro.
+  const setProgress = useCallback((ratio: number) => {
+    const v = String(Math.max(0, Math.min(1, ratio)))
+    rootRef.current
+      ?.querySelectorAll<HTMLElement | SVGElement>('.wf__played, .vp__head-line')
+      .forEach((n) => n.style.setProperty('--p', v))
   }, [])
+
+  // Atualiza o progresso e o tempo exibido só quando o segundo muda —
+  // o React não re-renderiza a cada quadro.
+  const paint = useCallback(
+    (t: number) => {
+      const d = durationRef.current
+      setProgress(d > 0 ? t / d : 0)
+      setTime((prev) => (Math.floor(prev) === Math.floor(t) ? prev : t))
+    },
+    [setProgress],
+  )
 
   // Registro no controle central
   useEffect(() => {
@@ -231,7 +243,7 @@ export function VoicePlayer({
     draggingRef.current = true
     rootRef.current?.setAttribute('data-dragging', '')
     const ratio = ratioAt(e.clientX)
-    rootRef.current?.style.setProperty('--p', String(ratio))
+    setProgress(ratio)
     setTime(ratio * durationRef.current)
   }
 
@@ -239,7 +251,7 @@ export function VoicePlayer({
     showHover(e.clientX)
     if (!draggingRef.current) return
     const ratio = ratioAt(e.clientX)
-    rootRef.current?.style.setProperty('--p', String(ratio))
+    setProgress(ratio)
     setTime(ratio * durationRef.current)
   }
 

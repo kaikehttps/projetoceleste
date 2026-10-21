@@ -3,9 +3,10 @@ import urnImage from '../../assets/art/soul-urn.webp'
 import { rng } from '../../lib/random'
 
 /**
- * A Urna flutuando no meio de anéis arcanos. A imagem da urna foi enviada
- * pelo Kaike; aura, anéis, símbolos, poeira e almas são desenhados aqui.
- * O brilho reage a --level e as almas orbitam com [data-playing] na seção.
+ * A Urna no meio de anéis arcanos. A imagem da urna foi enviada pelo Kaike;
+ * aura, anéis, símbolos e poeira são desenhados aqui e ficam parados.
+ * O que se mexe (flutuação, brilho da voz, almas) fica em camadas próprias
+ * em SoulUrn.tsx, para a placa de vídeo mover sem repintar o desenho.
  */
 
 const URN = { w: 266, h: 342 }
@@ -91,14 +92,6 @@ export function SpiritUrn({ className = '' }: { className?: string }) {
         ))}
       </g>
 
-      {/* almas em órbita: só aparecem enquanto a Urna fala */}
-      <g className="urn-art__souls" transform="translate(200 330) scale(1 0.24)">
-        <g className="urn-art__souls-spin">
-          {[0, 72, 144, 216, 288].map((a) => (
-            <circle key={a} r="7" cx="176" cy="0" transform={`rotate(${a})`} fill="var(--spirit)" filter="url(#urn-glow)" />
-          ))}
-        </g>
-      </g>
 
       {/* poeira suspensa */}
       <g fill="var(--star)" className="urn-art__dust">

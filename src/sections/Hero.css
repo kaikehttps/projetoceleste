@@ -1,5 +1,4 @@
 .hero {
-  --sy: 0;
   --on-near: var(--ink-2);
   position: relative;
   display: flex;
@@ -44,7 +43,7 @@
 .hero__stars {
   top: 0;
   height: 72%;
-  transform: translate3d(0, calc(var(--sy) * 0.55px), 0);
+  will-change: transform;
 }
 
 :root[data-theme='light'] .hero__stars {
@@ -58,16 +57,15 @@
   width: min(50vw, 700px);
   height: auto;
   aspect-ratio: 1;
-  transform: translate3d(0, calc(var(--sy) * 0.42px), 0);
+  will-change: transform;
 }
 
 .moon__spokes {
   transform-origin: 300px 300px;
-  animation: hero-spin 320s linear infinite;
 }
 
 .moon__glint {
-  animation: twinkle 6s ease-in-out infinite;
+  opacity: 0.85;
 }
 
 :root[data-theme='light'] .moon__eye,
@@ -122,7 +120,7 @@
 .hero__far {
   bottom: 15%;
   height: 62%;
-  transform: translate3d(0, calc(var(--sy) * 0.3px), 0);
+  will-change: transform;
 }
 
 .hero__fog-back {
@@ -133,7 +131,7 @@
 .hero__mid {
   bottom: 11%;
   height: 44%;
-  transform: translate3d(0, calc(var(--sy) * 0.18px), 0);
+  will-change: transform;
 }
 
 .hero__fog-mid {
@@ -145,7 +143,7 @@
 .hero__near {
   bottom: 0;
   height: 27%;
-  transform: translate3d(0, calc(var(--sy) * 0.06px), 0);
+  will-change: transform;
 }
 
 .hero__fog-front {
@@ -170,31 +168,11 @@
 
 .skyline__beacon {
   fill: #ff7aa2;
-  animation: beacon 3.6s ease-in-out infinite;
+  opacity: 0.85;
 }
 
 .twinkle {
-  animation: twinkle 5s ease-in-out infinite;
-}
-
-@keyframes beacon {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 1;
-  }
+  opacity: 0.7;
 }
 
 @keyframes hero-spin {
@@ -219,8 +197,7 @@
   padding-top: calc(var(--header-h) + 8vh);
   padding-bottom: max(28vh, 11rem);
   padding-bottom: max(28svh, 11rem);
-  transform: translate3d(0, calc(var(--sy) * -0.12px), 0);
-  opacity: calc(1 - var(--sy) / 900);
+  will-change: transform;
 }
 
 .hero__kicker {
@@ -334,9 +311,7 @@
   border-radius: 4px;
   background:
     radial-gradient(120% 90% at 50% 0%, rgb(216 138 228 / 0.16), transparent 70%),
-    rgb(16 11 20 / 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+    rgb(16 11 20 / 0.86);
   color: #cbb9cf;
   text-align: center;
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
@@ -385,9 +360,9 @@
   stroke-dasharray: 2 5;
 }
 
-.hero__seal-text {
-  transform-origin: 100px 100px;
+.hero__seal {
   animation: hero-spin 48s linear infinite;
+  will-change: transform;
 }
 
 .hero__seal text {

@@ -219,19 +219,30 @@
   filter: drop-shadow(0 0 6px var(--vp-glow));
 }
 
+/* trilho do tamanho da barra que desliza inteiro (transform): sem recalcular layout por quadro */
 .vp__head-line {
   position: absolute;
   top: -6px;
   bottom: -6px;
-  left: calc(var(--p) * 100%);
-  width: 2px;
-  margin-left: -1px;
-  background: var(--vp-ink);
-  border-radius: 2px;
-  box-shadow: 0 0 12px var(--vp-glow);
+  left: 0;
+  width: 100%;
+  transform: translateX(calc(var(--p) * 100%));
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
+  will-change: transform;
+}
+
+.vp__head-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: var(--vp-line-color, var(--vp-ink));
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--vp-line-glow, var(--vp-glow));
 }
 
 .vp[data-playing] .vp__head-line,
@@ -458,7 +469,7 @@
 
 /* Urna: espectral, vidro arroxeado e um ponto de verde sobrenatural */
 .vp--urn {
-  --vp-bg: linear-gradient(160deg, rgb(40 26 50 / 0.78), rgb(14 10 18 / 0.86));
+  --vp-bg: linear-gradient(160deg, rgb(40 26 50 / 0.92), rgb(14 10 18 / 0.95));
   --vp-line: rgb(233 184 240 / 0.26);
   --vp-bar: rgb(233 184 240 / 0.2);
   --vp-bar-played: var(--celeste-lilac);
@@ -467,14 +478,12 @@
   --vp-play-ink: #1b0f20;
   --vp-ink: #f7eef8;
   --vp-ink-2: #b7a5bd;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-deep);
 }
 
 .vp--urn .vp__head-line {
-  background: var(--spirit);
-  box-shadow: 0 0 14px var(--spirit-glow);
+  --vp-line-color: var(--spirit);
+  --vp-line-glow: var(--spirit-glow);
 }
 
 /* Dossiê: tinta sobre papel */

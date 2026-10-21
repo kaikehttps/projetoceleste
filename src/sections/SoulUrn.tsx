@@ -3,7 +3,7 @@ import { Fog } from '../components/art/Fog'
 import { SpiritUrn } from '../components/art/SpiritUrn'
 import { UrnStreet } from '../components/art/UrnStreet'
 import { TrackCollection } from '../components/player/TrackCollection'
-import { useIsPlaying, useSceneLevel } from '../audio/hooks'
+import { useIsPlaying, useVoiceGlow } from '../audio/hooks'
 import { urnTracks } from '../data/recordings'
 import { delay } from '../lib/style'
 import './SoulUrn.css'
@@ -12,7 +12,7 @@ const PLAYER_ID = 'urna'
 
 export function SoulUrn() {
   const ref = useRef<HTMLElement>(null)
-  useSceneLevel(ref, [PLAYER_ID])
+  useVoiceGlow(ref, [PLAYER_ID], '.urn__glow')
   const playing = useIsPlaying([PLAYER_ID])
 
   return (
@@ -60,7 +60,17 @@ export function SoulUrn() {
 
         <figure className="urn__art">
           <div className="urn__art-sticky">
-            <SpiritUrn />
+            <div className="urn__art-wrap">
+              <span className="urn__glow" aria-hidden="true" />
+              <SpiritUrn />
+              <div className="urn__souls" aria-hidden="true">
+                <div className="urn__souls-spin">
+                  {[0, 72, 144, 216, 288].map((a) => (
+                    <i key={a} style={{ transform: `rotate(${a}deg)` }} />
+                  ))}
+                </div>
+              </div>
+            </div>
             <figcaption className="sr-only">A Urna Espiritual</figcaption>
           </div>
         </figure>

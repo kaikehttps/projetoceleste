@@ -2,7 +2,7 @@ import { STAR4_PATH } from './Star4'
 
 /**
  * Fachada da loja do Vendedor — ilustração original (não é arte oficial).
- * A lâmpada e a luz interna reagem à variável CSS --level (voz tocando).
+ * O desenho é estático; a luz que acende com a voz é uma camada própria (.shop__lamp).
  */
 
 const BOTTLES: { x: number; w: number; h: number; neck: number }[] = [

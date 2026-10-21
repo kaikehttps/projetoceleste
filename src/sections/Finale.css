@@ -1,5 +1,4 @@
 .finale {
-  --level: 0;
   position: relative;
   min-height: min(1100px, 120svh);
   padding-block: var(--section-y) clamp(14rem, 34vw, 26rem);
@@ -42,7 +41,7 @@
 }
 
 .finale__halo {
-  opacity: calc(0.7 + var(--level) * 0.5);
+  opacity: 0.8;
 }
 
 .finale__city {
@@ -146,9 +145,7 @@
 }
 
 .finale__farewell .vp {
-  background: color-mix(in srgb, var(--bg) 55%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
   text-shadow: none;
 }
 

@@ -6,7 +6,6 @@ import { SkylineLayer } from '../components/art/SkylineLayer'
 import type { SkylineOptions } from '../components/art/skyline'
 import { STAR4_PATH } from '../components/art/Star4'
 import { VoicePlayer } from '../components/player/VoicePlayer'
-import { useSceneLevel } from '../audio/hooks'
 import { site } from '../config'
 import { farewellTrack } from '../data/recordings'
 import { delay } from '../lib/style'
@@ -30,7 +29,6 @@ const CITY: SkylineOptions = {
 
 export function Finale() {
   const ref = useRef<HTMLElement>(null)
-  useSceneLevel(ref, [PLAYER_ID])
 
   return (
     <section className="finale scene" id="celeste" ref={ref} aria-labelledby="finale-title">
