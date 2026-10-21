@@ -12,6 +12,7 @@ import './styles/tokens.css'
 import './styles/base.css'
 
 import { App } from './App'
+import './styles/fit.css'
 
 document.documentElement.classList.add('js')
 
