@@ -58,6 +58,50 @@
   color: var(--accent);
 }
 
+.site-footer__music {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 2.4rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px dashed var(--line-2);
+  border-radius: 4px;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+.site-footer__music .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent);
+}
+
+.site-footer__music .label svg {
+  width: 15px;
+  height: 15px;
+}
+
+.site-footer__music strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.site-footer__file {
+  color: var(--ink-3);
+  font-family: var(--font-label);
+  letter-spacing: 0.06em;
+}
+
+.site-footer__music a {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.site-footer__music a:hover {
+  color: var(--accent);
+}
+
 .site-footer__disclaimer {
   display: flex;
   gap: 0.8rem;

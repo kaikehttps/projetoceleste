@@ -46,6 +46,10 @@ chance de colaborar com a equipe.
 
 ## ✦ O que tem nessa cidade
 
+**🎮 Uma tela de título.** Como num jogo: o nome surge letra por letra, você escolhe entrar com ou
+sem som, e o tema do menu de Deadlock segue baixinho ao fundo. Ele se cala sozinho quando uma
+dublagem começa.
+
 **🌃 Uma capa de cinema.** Uma Nova York noturna, com holofotes, trem elevado, névoa e uma lua que
 vigia a cidade. Presta atenção no céu.
 
@@ -69,7 +73,11 @@ sozinho: a cidade espera você apertar o play.
   <sub>
     ✦ Projeto independente de fã, sem vínculo oficial ou patrocínio da Valve ou do Projeto Celeste.<br />
     Deadlock, seus personagens e demais propriedades intelectuais pertencem aos respectivos titulares.<br />
-    Os cenários desta página são ilustrações originais e não representam artes oficiais do jogo. ✦
+    Os cenários desta página são ilustrações originais e não representam artes oficiais do jogo.<br />
+    ♪ Música de fundo: <em>Main Menu — Original Theme</em> (music_title_155bpm) · Deadlock © Valve Software.
+    Trilha apresentada pelo canal <a href="https://www.youtube.com/@DeadlockAir">Dead Air</a>, com edição de
+    <a href="https://www.youtube.com/@DeadAirJacky">Jacky Powers</a> e design de
+    <a href="https://www.youtube.com/@DeadAirDaisy">Daisy Powers</a>. ✦
   </sub>
 </p>
 

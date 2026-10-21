@@ -96,7 +96,7 @@ ol {
 .grain {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 160;
   pointer-events: none;
   background-image: url('../assets/textures/grain.png');
   background-size: 240px;

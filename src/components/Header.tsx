@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Headphones, Menu, Moon, Sun, X } from 'lucide-react'
 import { useTheme } from '../lib/theme'
 import { CelesteLogo } from './Logo'
+import { MusicToggle } from './MusicToggle'
 import './Header.css'
 
 const LINKS = [
@@ -56,7 +57,8 @@ export function Header() {
         </nav>
 
         <div className="site-header__actions">
-          <button type="button" className="icon-btn" onClick={toggle} aria-label={themeLabel} title={themeLabel}>
+          <MusicToggle />
+          <button type="button" className="icon-btn site-header__theme" onClick={toggle} aria-label={themeLabel} title={themeLabel}>
             {theme === 'dark' ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
           </button>
           <a className="btn btn--small site-header__cta" href="#vendedor">

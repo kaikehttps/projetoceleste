@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Header } from './components/Header'
+import { Intro } from './components/Intro'
 import { Marquee } from './components/Marquee'
 import { NowPlaying } from './components/player/NowPlaying'
 import { useScenes } from './lib/useScenes'
@@ -19,25 +21,29 @@ const MARQUEE = [
 ]
 
 export function App() {
+  const [intro, setIntro] = useState(true)
   useScenes()
   return (
     <>
-      <a className="skip-link" href="#vendedor">
-        Pular para as demonstrações
-      </a>
-      <Header />
-      <main id="conteudo">
-        <Hero />
-        <About />
-        <div id="demonstracoes">
-          <Marquee items={MARQUEE} />
-          <Shopkeeper />
-          <SoulUrn />
-        </div>
-        <Finale />
-      </main>
-      <Footer />
-      <NowPlaying />
+      {intro && <Intro onDone={() => setIntro(false)} />}
+      <div className="app" inert={intro}>
+        <a className="skip-link" href="#vendedor">
+          Pular para as demonstrações
+        </a>
+        <Header />
+        <main id="conteudo">
+          <Hero />
+          <About />
+          <div id="demonstracoes">
+            <Marquee items={MARQUEE} />
+            <Shopkeeper />
+            <SoulUrn />
+          </div>
+          <Finale />
+        </main>
+        <Footer />
+        <NowPlaying />
+      </div>
       <div className="grain" aria-hidden="true" />
     </>
   )

@@ -18,4 +18,27 @@ export const site = {
    *      { label: 'Discord', href: 'https://discord.com/users/…' }
    */
   contacts: [] as { label: string; href: string }[],
+
+  /**
+   * Música de fundo que começa na tela de entrada e segue baixinha pelo site.
+   * Coloque o arquivo em public/audio/ com este nome. Se o arquivo não existir,
+   * a entrada mostra só "Entrar" e o botão de música não aparece.
+   */
+  music: {
+    src: 'audio/musica-tema.mp3',
+    /** Volume de fundo (0 a 1). */
+    volume: 0.14,
+    title: 'Main Menu — Original Theme',
+    file: 'music_title_155bpm',
+    copyright: 'Valve Software — Deadlock',
+    /** Vídeo de referência e seus créditos. */
+    reference: {
+      url: 'https://www.youtube.com/watch?v=WkGDC3idX1E',
+      channel: { name: 'Dead Air', href: 'https://www.youtube.com/@DeadlockAir' },
+      people: [
+        { role: 'Edição', name: 'Jacky Powers', href: 'https://www.youtube.com/@DeadAirJacky' },
+        { role: 'Design gráfico', name: 'Daisy Powers', href: 'https://www.youtube.com/@DeadAirDaisy' },
+      ],
+    },
+  },
 }
