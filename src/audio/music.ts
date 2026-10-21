@@ -5,7 +5,9 @@ import { director } from './director'
 /**
  * Música de fundo.
  *
- * - Só começa com um gesto (os navegadores bloqueiam som automático).
+ * - Tenta começar sozinha assim que a página abre (autoStart). Os navegadores
+ *   costumam bloquear som sem interação; nesse caso ela entra no primeiro
+ *   clique, toque ou tecla em qualquer lugar da página.
  * - Dois volumes: "menu" na tela de entrada e "background" no site.
  * - Volume pelo Web Audio (GainNode): funciona até no iPhone, onde o volume
  *   do elemento <audio> não pode ser alterado.
@@ -31,6 +33,7 @@ const SRC = `${import.meta.env.BASE_URL}${site.music.src}`
 const FADE_IN = 1.6
 const FADE_OUT = 0.7
 const MODE_FADE = 3.5
+const GESTURES = ['pointerdown', 'pointerup', 'touchend', 'keydown', 'click']
 const BANDS: [number, number][] = [
   [1, 5], // graves
   [6, 20],
@@ -52,6 +55,9 @@ class BackgroundMusic {
   private fadeTimer = 0
   private fadeFrame = 0
   private noWebAudio = false
+  private autoTried = false
+  private armed = false
+  private applyId = 0
 
   constructor() {
     if (typeof window === 'undefined') return
@@ -76,6 +82,19 @@ class BackgroundMusic {
 
   getState = () => this.state
 
+  /**
+   * Tenta tocar já na abertura. Se o navegador bloquear, fica à espera do
+   * primeiro gesto (clique, toque ou tecla) e começa nele.
+   */
+  autoStart(mode: MusicMode) {
+    if (this.state.available !== true || this.autoTried) return
+    this.autoTried = true
+    this.set({ enabled: true, mode })
+    this.ensure()
+    this.apply()
+    this.arm()
+  }
+
   /** Liga a música num modo. Chame a partir de um clique ou tecla. */
   start(mode: MusicMode) {
     if (this.state.available === false) return
@@ -96,6 +115,7 @@ class BackgroundMusic {
     if (this.state.available === false) return
     if (enabled) this.ensure()
     this.set({ enabled })
+    if (!enabled) this.disarm()
     this.apply()
   }
 
@@ -183,23 +203,68 @@ class BackgroundMusic {
     }
   }
 
+  /** Toca de verdade? O navegador pode negar o play ou deixar o contexto de áudio suspenso. */
+  private async attempt() {
+    const audio = this.audio!
+    const ctx = this.ctx
+    try {
+      await audio.play()
+      if (ctx && ctx.state !== 'running') {
+        await Promise.race([ctx.resume(), new Promise((r) => setTimeout(r, 350))])
+        if ((ctx.state as AudioContextState) !== 'running') {
+          audio.pause()
+          return false
+        }
+      }
+      return true
+    } catch {
+      return false
+    }
+  }
+
   private apply() {
     const audio = this.audio
     if (!audio) return
     const want = this.state.enabled && !this.ducked && !this.hidden
+    const id = ++this.applyId
     clearTimeout(this.fadeTimer)
     if (want) {
-      this.ctx?.resume().catch(() => {})
-      audio.play().catch(() => {})
       this.fadeTo(this.targetVolume(), FADE_IN)
-    } else if (this.gain || this.noWebAudio) {
+      this.attempt().then((ok) => {
+        if (id !== this.applyId) return
+        if (ok) this.disarm()
+        else this.fadeTo(0, 0.01)
+        this.set({ audible: ok })
+      })
+      return
+    }
+    if (this.gain || this.noWebAudio) {
       this.fadeTo(0, FADE_OUT)
       this.fadeTimer = window.setTimeout(() => audio.pause(), FADE_OUT * 1000 + 60)
     } else {
-      // só pré-carregada, nunca tocou: nada a esmaecer
       audio.pause()
     }
-    this.set({ audible: want })
+    this.set({ audible: false })
+  }
+
+  /** Espera o primeiro gesto do visitante para liberar o som bloqueado. */
+  private onGesture = (e: Event) => {
+    if ((e.target as Element | null)?.closest?.('[data-music-control]')) return
+    if (!this.state.enabled || this.state.audible || this.state.available !== true) return
+    this.ensure()
+    this.apply()
+  }
+
+  private arm() {
+    if (this.armed) return
+    this.armed = true
+    for (const t of GESTURES) window.addEventListener(t, this.onGesture, true)
+  }
+
+  private disarm() {
+    if (!this.armed) return
+    this.armed = false
+    for (const t of GESTURES) window.removeEventListener(t, this.onGesture, true)
   }
 
   private fadeTo(target: number, seconds: number) {

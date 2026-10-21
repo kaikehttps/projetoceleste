@@ -44,6 +44,29 @@
   cursor: pointer;
 }
 
+/* cortina: cobre o primeiro desenho das camadas e se abre devagar */
+.title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: #0b0919;
+  pointer-events: none;
+  animation: curtain 1.6s 0.25s ease-out forwards;
+}
+
+@keyframes curtain {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 2) enquanto a entrada cobre a tela, o site por trás não é desenhado nem animado */
+.intro-open .app {
+  visibility: hidden;
+}
+
 .intro-open body {
   overflow: hidden;
 }
@@ -236,54 +259,46 @@
 
 /* detalhes vivos da cidade */
 .tc__twinkle {
-  animation: tc-twinkle 11s steps(1, end) infinite;
+  animation: tc-twinkle 14s ease-in-out infinite;
 }
 
 @keyframes tc-twinkle {
   0%,
-  64% {
+  60%,
+  100% {
     opacity: 1;
   }
-  65%,
-  80% {
-    opacity: 0.12;
+  72%,
+  84% {
+    opacity: 0.25;
   }
 }
 
 .tc__neon {
-  animation: neon-flicker 8s steps(1, end) infinite;
+  animation: neon-hum 6s ease-in-out infinite;
 }
 
-@keyframes neon-flicker {
+@keyframes neon-hum {
   0%,
-  90% {
+  100% {
     opacity: 1;
   }
-  91% {
-    opacity: 0.35;
-  }
-  92% {
-    opacity: 1;
-  }
-  95% {
-    opacity: 0.55;
-  }
-  96% {
-    opacity: 1;
+  50% {
+    opacity: 0.8;
   }
 }
 
 .tc__neon-dot {
-  animation: neon-dot 1.6s steps(2, jump-none) infinite;
+  animation: neon-dot 3.2s ease-in-out infinite alternate;
 }
 
 .tc__neon-dot:nth-of-type(2n) {
-  animation-delay: -0.8s;
+  animation-delay: -1.6s;
 }
 
 @keyframes neon-dot {
   to {
-    opacity: 0.25;
+    opacity: 0.35;
   }
 }
 
@@ -312,7 +327,6 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .ribbon > path {
@@ -735,9 +749,7 @@
   padding: 0.5rem 1rem;
   border: 1px solid rgb(233 184 240 / 0.35);
   border-radius: 999px;
-  background: rgb(12 8 18 / 0.45);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgb(12 8 18 / 0.62);
   color: #f8f0f6;
   font-family: var(--font-label);
   font-size: 0.92rem;

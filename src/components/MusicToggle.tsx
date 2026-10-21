@@ -13,6 +13,7 @@ export function MusicToggle() {
       type="button"
       className="icon-btn music-toggle"
       onClick={() => music.toggle()}
+      data-music-control
       aria-pressed={enabled}
       aria-label={label}
       title={`${label} · ${site.music.title}`}

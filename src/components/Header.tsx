@@ -7,7 +7,7 @@ import './Header.css'
 
 const LINKS = [
   { href: '#projeto', label: 'O projeto' },
-  { href: '#demonstracoes', label: 'Demonstrações' },
+  { href: '#vendedor', label: 'Demonstrações' },
   { href: '#sobre', label: 'Sobre mim' },
 ]
 

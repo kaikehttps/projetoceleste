@@ -33,7 +33,6 @@ const IGNORED_KEYS = new Set(['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'CapsLoc
 export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
   const { available, enabled } = useMusic()
   const [phase, setPhase] = useState<Phase>('title')
-  const [wantSound, setWantSound] = useState(true)
   const [burst, setBurst] = useState(0)
   const phaseRef = useRef<Phase>('title')
   const rootRef = useRef<HTMLDivElement>(null)
@@ -43,8 +42,9 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
   const [touch] = useState(() => window.matchMedia('(hover: none)').matches)
   const hasMusic = available !== false
 
+  // tenta começar a música já na abertura; se o navegador bloquear, entra no primeiro toque/tecla
   useEffect(() => {
-    if (available) music.preload()
+    if (available) music.autoStart('menu')
   }, [available])
 
   useEffect(() => {
@@ -60,11 +60,11 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
   const begin = useCallback(() => {
     if (phaseRef.current !== 'title') return
     phaseRef.current = 'menu'
-    if (hasMusic && wantSound) music.start('menu')
+    if (hasMusic && music.getState().enabled) music.start('menu')
     setBurst((b) => b + 1)
     setPhase('menu')
     window.setTimeout(() => menuRef.current?.querySelector('button')?.focus({ preventScroll: true }), 700)
-  }, [hasMusic, wantSound])
+  }, [hasMusic])
 
   const leave = useCallback(
     (target: string) => {
@@ -107,16 +107,22 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
     let frame = 0
     let beat = 0
     const avg = [0, 0, 0, 0]
+    const last = new Map<string, string>()
+    const put = (k: string, v: string) => {
+      if (last.get(k) === v) return
+      last.set(k, v)
+      el.style.setProperty(k, v)
+    }
     const loop = () => {
       const b = music.readBands()
       // pulso = quanto os graves passam da média recente (a trilha é muito comprimida)
       for (let i = 0; i < 4; i++) avg[i] += (b[i] - avg[i]) * 0.03
       const pulse = Math.max(0, Math.min(1, (b[0] - avg[0]) * 6 + 0.15 * (b[0] > 0.05 ? 1 : 0)))
       beat += (pulse - beat) * (pulse > beat ? 0.5 : 0.1)
-      el.style.setProperty('--beat', beat.toFixed(3))
+      put('--beat', beat.toFixed(2))
       for (let i = 0; i < 4; i++) {
         const v = Math.max(0, Math.min(1, (b[i] - avg[i] * 0.7) * 3.2))
-        el.style.setProperty(`--b${i}`, v.toFixed(3))
+        put(`--b${i}`, v.toFixed(2))
       }
       frame = requestAnimationFrame(loop)
     }
@@ -161,10 +167,9 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
     next?.focus()
   }
 
-  const soundOn = phase === 'title' ? wantSound : enabled
+  const soundOn = enabled
   const toggleSound = () => {
-    if (phaseRef.current === 'title') setWantSound((w) => !w)
-    else if (enabled) music.setEnabled(false)
+    if (enabled) music.setEnabled(false)
     else music.start('menu')
   }
 
@@ -241,6 +246,7 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
         <button
           type="button"
           className="title__corner title__corner--tr title__sound"
+          data-music-control
           onClick={toggleSound}
           aria-pressed={soundOn}
           aria-label={soundOn ? 'Som ligado — clique para desligar' : 'Som desligado — clique para ligar'}

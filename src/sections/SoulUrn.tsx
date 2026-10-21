@@ -36,7 +36,7 @@ export function SoulUrn() {
       </header>
 
       <div className="container urn__grid">
-        <div className="urn__content">
+        <div className="urn__intro">
           <div className="urn__names" data-reveal>
             <p className="urn__pt">A Urna Espiritual</p>
             <p className="urn__aka label">O artefato que fala enquanto é carregado</p>
@@ -56,16 +56,6 @@ export function SoulUrn() {
             <footer className="label">Kaike, na gravação de apresentação</footer>
           </blockquote>
 
-          <div data-reveal style={delay(3)}>
-            <TrackCollection
-              id={PLAYER_ID}
-              tracks={urnTracks}
-              variant="urn"
-              itemLabel="Fala"
-              labelPrefix="A Urna"
-              title="Coleção de falas"
-            />
-          </div>
         </div>
 
         <figure className="urn__art">
@@ -74,6 +64,17 @@ export function SoulUrn() {
             <figcaption className="sr-only">A Urna Espiritual</figcaption>
           </div>
         </figure>
+
+        <div className="urn__listen" data-reveal style={delay(3)}>
+          <TrackCollection
+            id={PLAYER_ID}
+            tracks={urnTracks}
+            variant="urn"
+            itemLabel="Fala"
+            labelPrefix="A Urna"
+            title="Coleção de falas"
+          />
+        </div>
       </div>
     </section>
   )

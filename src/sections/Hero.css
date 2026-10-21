@@ -170,7 +170,7 @@
 
 .skyline__beacon {
   fill: #ff7aa2;
-  animation: beacon 3.6s steps(1, end) infinite;
+  animation: beacon 3.6s ease-in-out infinite;
 }
 
 .twinkle {
@@ -179,11 +179,10 @@
 
 @keyframes beacon {
   0%,
-  60% {
-    opacity: 0.15;
-  }
-  61%,
   100% {
+    opacity: 0.2;
+  }
+  50% {
     opacity: 1;
   }
 }
