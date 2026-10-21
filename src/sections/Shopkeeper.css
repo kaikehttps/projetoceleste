@@ -1,0 +1,243 @@
+/*
+ * A loja é sempre um ambiente noturno e quente, nos dois temas:
+ * no claro só fica um pouco mais "fim de tarde".
+ */
+.shop {
+  --level: 0;
+  --shop-ink: #f7ebe0;
+  --shop-ink-2: #cdb7a6;
+  --fog: #e9cfb6;
+  --fog-strength: 0.16;
+  position: relative;
+  padding-block: var(--section-y) calc(var(--section-y) * 0.9);
+  overflow: clip;
+  isolation: isolate;
+  color: var(--shop-ink);
+}
+
+.shop__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(
+      48% 38% at 30% 62%,
+      rgb(240 187 111 / calc(0.14 + var(--level) * 0.16)),
+      transparent 72%
+    ),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 7%, transparent 90%, var(--bg) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='28'%3E%3Cpath d='M0 .5H72M0 14.5H72M.5 0V14M36.5 14V28' stroke='%23000' stroke-opacity='.38' stroke-width='2' fill='none'/%3E%3C/svg%3E")
+      0 0 / 72px 28px,
+    var(--brick);
+}
+
+.shop__backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 35% 55%, transparent 40%, rgb(6 3 5 / 0.72) 100%);
+}
+
+.shop__fog {
+  bottom: 0;
+  height: 40%;
+  z-index: 1;
+}
+
+/* ——— Título ——— */
+.shop__head {
+  position: relative;
+  z-index: 1;
+}
+
+.shop__eyebrow {
+  color: var(--amber);
+}
+
+:root[data-theme='light'] .shop__eyebrow {
+  color: #f0bb6f;
+}
+
+.shop__title {
+  margin: clamp(1rem, 2vw, 1.6rem) 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.84;
+  text-transform: uppercase;
+}
+
+.shop__the {
+  display: block;
+  font-family: var(--font-serif);
+  margin: 0 0 0.15em 0.08em;
+  color: var(--amber);
+  font-size: clamp(1.6rem, 3.4vw, 3.2rem);
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+}
+
+:root[data-theme='light'] .shop__the {
+  color: #f0bb6f;
+}
+
+.shop__name {
+  display: block;
+  margin-left: -0.04em;
+  font-size: clamp(3.1rem, 11.6vw, 11.5rem);
+  font-variation-settings: 'opsz' 40;
+  letter-spacing: -0.012em;
+  background: linear-gradient(178deg, #fff6ea 30%, #f3cf9a 75%, #c98d4a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 calc(18px + var(--level) * 40px) rgb(240 187 111 / calc(0.14 + var(--level) * 0.3)));
+}
+
+/* ——— Grade: vitrine + texto ——— */
+.shop__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-top: clamp(1rem, 2vw, 2rem);
+}
+
+.shop__art {
+  position: relative;
+  margin: clamp(-10rem, -10vw, -3rem) 0 0;
+}
+
+.shop__art svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 60px rgb(0 0 0 / 0.55));
+}
+
+.art-credit {
+  margin-top: 0.6rem;
+  color: var(--shop-ink-2);
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.shop__content {
+  display: grid;
+  gap: 1.5rem;
+  align-self: start;
+  padding-top: clamp(0rem, 3vw, 3rem);
+}
+
+.shop__names {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.shop__pt {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.shop__aka {
+  color: var(--shop-ink-2);
+  font-size: 0.86rem;
+}
+
+.shop__tagline {
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--brass);
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.shop__desc {
+  max-width: 46ch;
+  color: var(--shop-ink-2);
+}
+
+/* luz da loja reagindo à voz */
+.sf__halo {
+  opacity: calc(0.62 + var(--level) * 0.5);
+}
+
+.sf__surge {
+  opacity: calc(var(--level) * 0.6);
+}
+
+.sf__bulb {
+  opacity: calc(0.82 + var(--level) * 0.18);
+}
+
+.sf__potion {
+  opacity: calc(0.45 + var(--level) * 0.45);
+}
+
+.sf__reflect {
+  opacity: calc(0.75 + var(--level) * 0.5);
+}
+
+.sf__sign {
+  font-family: var(--font-display);
+  font-size: 58px;
+  font-weight: 800;
+  letter-spacing: 9px;
+}
+
+.sf__sign-small {
+  fill: var(--brass);
+  font-family: var(--font-label);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 7px;
+}
+
+.sf__glass-text {
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 9px;
+  opacity: 0.85;
+}
+
+.sf__open {
+  fill: #6b2a46;
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.sf__open-small {
+  fill: #6b2a46;
+  font-family: var(--font-label);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+@media (max-width: 980px) {
+  .shop__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop__art {
+    max-width: 620px;
+    width: 100%;
+    margin: clamp(-5rem, -9vw, -2rem) auto 0;
+  }
+
+  .shop__content {
+    padding-top: 0;
+  }
+}

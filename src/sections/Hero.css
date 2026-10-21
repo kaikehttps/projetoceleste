@@ -1,0 +1,583 @@
+.hero {
+  --sy: 0;
+  --on-near: var(--ink-2);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: max(660px, 100svh);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:root[data-theme='light'] .hero {
+  --on-near: #f1e4f0;
+}
+
+/* ═════════ Arte em camadas ═════════ */
+
+.hero__art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__art > * {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.hero__sky {
+  inset: 0;
+  height: 100%;
+  background:
+    radial-gradient(
+      90% 55% at 64% 86%,
+      color-mix(in srgb, var(--haze) calc(var(--haze-strength) * 100%), transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(60% 40% at 18% 90%, color-mix(in srgb, var(--haze) 14%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 42%, var(--sky-low) 82%);
+}
+
+.hero__stars {
+  top: 0;
+  height: 72%;
+  transform: translate3d(0, calc(var(--sy) * 0.55px), 0);
+}
+
+:root[data-theme='light'] .hero__stars {
+  opacity: 0.35;
+}
+
+.hero__moon {
+  top: max(9vh, 70px);
+  left: auto;
+  right: 3vw;
+  width: min(50vw, 700px);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translate3d(0, calc(var(--sy) * 0.42px), 0);
+}
+
+.moon__spokes {
+  transform-origin: 300px 300px;
+  animation: hero-spin 320s linear infinite;
+}
+
+.moon__glint {
+  animation: twinkle 6s ease-in-out infinite;
+}
+
+:root[data-theme='light'] .moon__eye,
+:root[data-theme='light'] .moon__spokes {
+  stroke: var(--city-mid);
+}
+
+/* holofotes de estreia cruzando o céu */
+.hero__beams {
+  inset: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero__beam {
+  position: absolute;
+  bottom: 14%;
+  width: 26vw;
+  min-width: 220px;
+  height: 125vh;
+  background: linear-gradient(to top, var(--beam), transparent 80%);
+  clip-path: polygon(47% 100%, 53% 100%, 100% 0, 0 0);
+  transform-origin: 50% 100%;
+  animation: beam-a 26s ease-in-out infinite alternate;
+}
+
+.hero__beam--a {
+  left: 8%;
+  rotate: -16deg;
+}
+
+.hero__beam--b {
+  left: 58%;
+  rotate: 12deg;
+  animation-name: beam-b;
+  animation-duration: 31s;
+  animation-delay: -12s;
+}
+
+@keyframes beam-a {
+  to {
+    rotate: 10deg;
+  }
+}
+
+@keyframes beam-b {
+  to {
+    rotate: -14deg;
+  }
+}
+
+.hero__far {
+  bottom: 15%;
+  height: 62%;
+  transform: translate3d(0, calc(var(--sy) * 0.3px), 0);
+}
+
+.hero__fog-back {
+  bottom: 14%;
+  height: 36%;
+}
+
+.hero__mid {
+  bottom: 11%;
+  height: 44%;
+  transform: translate3d(0, calc(var(--sy) * 0.18px), 0);
+}
+
+.hero__fog-mid {
+  bottom: 4%;
+  height: 30%;
+  opacity: calc(var(--fog-strength) * 0.9);
+}
+
+.hero__near {
+  bottom: 0;
+  height: 27%;
+  transform: translate3d(0, calc(var(--sy) * 0.06px), 0);
+}
+
+.hero__fog-front {
+  bottom: -6%;
+  height: 24%;
+  opacity: calc(var(--fog-strength) * 0.75);
+}
+
+.hero__vignette {
+  inset: 0;
+  height: 100%;
+  background:
+    radial-gradient(140% 95% at 50% 35%, transparent 55%, rgb(4 2 6 / 0.6) 100%),
+    linear-gradient(to bottom, transparent 84%, color-mix(in srgb, var(--bg) 70%, transparent) 94%, var(--bg) 100%);
+}
+
+:root[data-theme='light'] .hero__vignette {
+  background:
+    radial-gradient(140% 95% at 50% 35%, transparent 60%, rgb(80 40 80 / 0.16) 100%),
+    linear-gradient(to bottom, transparent 84%, color-mix(in srgb, var(--bg) 70%, transparent) 94%, var(--bg) 100%);
+}
+
+.skyline__beacon {
+  fill: #ff7aa2;
+  animation: beacon 3.6s steps(1, end) infinite;
+}
+
+.twinkle {
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+@keyframes beacon {
+  0%,
+  60% {
+    opacity: 0.15;
+  }
+  61%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═════════ Conteúdo ═════════ */
+
+.hero__content {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'kicker  kicker'
+    'title   title'
+    'copy    dedication'
+    'actions dedication';
+  align-items: end;
+  gap: 0 2.5rem;
+  padding-top: calc(var(--header-h) + 8vh);
+  padding-bottom: max(28vh, 11rem);
+  padding-bottom: max(28svh, 11rem);
+  transform: translate3d(0, calc(var(--sy) * -0.12px), 0);
+  opacity: calc(1 - var(--sy) / 900);
+}
+
+.hero__kicker {
+  grid-area: kicker;
+  margin-bottom: clamp(1rem, 2.4vw, 1.8rem);
+  color: var(--ink-2);
+}
+
+.hero__title {
+  grid-area: title;
+  margin: 0;
+  font-weight: inherit;
+}
+
+.hero__title-main {
+  display: block;
+  margin-left: -0.04em;
+  font-size: var(--fs-mega);
+  font-weight: 900;
+  font-variation-settings: 'opsz' 40;
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    176deg,
+    var(--ink) 30%,
+    color-mix(in srgb, var(--ink) 62%, var(--celeste-lilac)) 78%,
+    color-mix(in srgb, var(--ink) 40%, var(--celeste-pink)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 48px rgb(216 138 228 / 0.2)) drop-shadow(0 14px 30px rgb(0 0 0 / 0.45));
+  padding-bottom: 0.04em;
+}
+
+:root[data-theme='light'] .hero__title-main {
+  background: linear-gradient(176deg, var(--ink) 35%, color-mix(in srgb, var(--ink) 55%, var(--accent)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 18px 30px rgb(80 40 80 / 0.18));
+}
+
+.hero__title-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-top: clamp(1rem, 2.2vw, 1.8rem);
+  color: var(--accent);
+  font-family: var(--font-label);
+  font-size: clamp(0.95rem, 2.1vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+}
+
+.hero__title-sub .star4 {
+  width: 0.72em;
+  height: 0.72em;
+}
+
+.hero__copy,
+.hero__kicker {
+  text-shadow: 0 1px 22px var(--bg), 0 0 2px var(--bg);
+}
+
+.hero__copy {
+  grid-area: copy;
+  display: grid;
+  gap: 0.5rem;
+  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+  max-width: 34rem;
+}
+
+.hero__tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.18;
+}
+
+.hero__byline {
+  color: var(--ink-2);
+  font-size: var(--fs-lead);
+}
+
+.hero__byline strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hero__actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.hero__dedication {
+  /* "ingresso" escuro em qualquer tema: a logo branca original sempre legível */
+  grid-area: dedication;
+  align-self: end;
+  justify-self: end;
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  padding: 1.1rem 1.4rem 1rem;
+  border: 1px solid rgb(233 184 240 / 0.28);
+  border-radius: 4px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgb(216 138 228 / 0.16), transparent 70%),
+    rgb(16 11 20 / 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #cbb9cf;
+  text-align: center;
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.8);
+}
+
+.hero__dedication .label {
+  font-size: 0.82rem;
+  letter-spacing: 0.26em;
+}
+
+.hero__dedication-foot {
+  padding-top: 0.6rem;
+  border-top: 1px dashed rgb(233 184 240 / 0.3);
+  color: var(--celeste-lilac);
+}
+
+.hero__celeste {
+  width: clamp(150px, 14vw, 210px);
+  filter: drop-shadow(0 0 20px rgb(216 138 228 / 0.45));
+}
+
+/* dentro do ingresso a logo é sempre a versão branca */
+:root[data-theme='light'] .hero__celeste .logo__on-dark {
+  display: block !important;
+}
+
+:root[data-theme='light'] .hero__celeste .logo__on-light {
+  display: none !important;
+}
+
+/* selo editorial giratório, carimbado no canto do título */
+.hero__seal {
+  position: absolute;
+  top: calc(var(--header-h) + 6vh);
+  right: var(--gutter);
+  width: clamp(104px, 10vw, 140px);
+  overflow: visible;
+}
+
+.hero__seal-ring {
+  fill: none;
+  stroke: var(--line-2);
+}
+
+.hero__seal-ring--dash {
+  stroke-dasharray: 2 5;
+}
+
+.hero__seal-text {
+  transform-origin: 100px 100px;
+  animation: hero-spin 48s linear infinite;
+}
+
+.hero__seal text {
+  fill: var(--ink-2);
+  font-family: var(--font-label);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hero__seal-star {
+  fill: var(--accent);
+}
+
+/* textos de borda */
+.hero__side {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.82rem;
+  letter-spacing: 0.32em;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+}
+
+.hero__side--left {
+  left: clamp(0.6rem, 1.4vw, 1.4rem);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.hero__side--right {
+  right: clamp(0.6rem, 1.4vw, 1.4rem);
+  transform: translateY(-50%);
+}
+
+/* indicador de rolagem */
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1rem, 3vh, 2rem);
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem;
+  color: var(--on-near);
+  text-decoration: none;
+  transform: translateX(-50%);
+}
+
+.hero__scroll .label {
+  font-size: 0.82rem;
+  letter-spacing: 0.34em;
+}
+
+.hero__scroll-line {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  width: 1px;
+  height: 46px;
+  background: linear-gradient(currentColor, transparent);
+  opacity: 0.8;
+}
+
+.hero__scroll-line svg {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  top: 0;
+  animation: scroll-hint 2.6s var(--ease-cine) infinite;
+}
+
+.hero__scroll:hover {
+  color: var(--accent);
+}
+
+@keyframes scroll-hint {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+}
+
+/* notebooks com pouca altura: a capa inteira cabe na primeira tela */
+@media (max-height: 820px) and (min-width: 761px) {
+  .hero__content {
+    padding-top: calc(var(--header-h) + 3vh);
+    padding-bottom: max(24vh, 9rem);
+  }
+
+  .hero__title-main {
+    font-size: min(var(--fs-mega), 21vh);
+  }
+
+  .hero__copy {
+    margin-top: 1.2rem;
+  }
+
+  .hero__actions {
+    margin-top: 1.4rem;
+  }
+}
+
+@media (max-width: 1180px) {
+  .hero__side {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero__content {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'kicker  kicker'
+      'title   title'
+      'copy    copy'
+      'actions actions'
+      'seal    dedication';
+    padding-top: calc(var(--header-h) + 42vw);
+    padding-bottom: max(22vh, 8.5rem);
+    padding-bottom: max(22svh, 8.5rem);
+  }
+
+  /* no celular a lua sobe para o canto, longe do título */
+  .hero__moon {
+    top: calc(var(--header-h) - 30vw);
+    right: -36vw;
+    width: 100vw;
+  }
+
+  .hero__far {
+    height: 46%;
+    bottom: 17%;
+  }
+
+  .hero__mid {
+    height: 34%;
+    bottom: 13%;
+  }
+
+  .hero__near {
+    height: 20%;
+  }
+
+  .hero__beam {
+    width: 60vw;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .hero__seal {
+    position: static;
+    grid-area: seal;
+    align-self: center;
+    width: 96px;
+    margin-top: 1.8rem;
+  }
+
+  .hero__dedication {
+    margin-top: 1.8rem;
+    padding: 0.9rem 1rem 0.8rem;
+  }
+
+  .hero__celeste {
+    width: min(140px, 36vw);
+  }
+
+  .hero__title-sub {
+    letter-spacing: 0.28em;
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}

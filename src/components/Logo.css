@@ -1,0 +1,21 @@
+.logo {
+  display: inline-block;
+  line-height: 0;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.logo__on-light {
+  display: none !important;
+}
+
+:root[data-theme='light'] .logo__on-dark {
+  display: none !important;
+}
+
+:root[data-theme='light'] .logo__on-light {
+  display: block !important;
+}

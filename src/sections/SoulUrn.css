@@ -1,0 +1,352 @@
+.urn {
+  --level: 0;
+  position: relative;
+  padding-block: var(--section-y);
+  overflow: clip;
+  isolation: isolate;
+}
+
+.urn__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.urn__street {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.us__vp {
+  opacity: calc(0.75 + var(--level) * 0.6);
+}
+
+.us__ghost {
+  animation: ghost-window 7s ease-in-out infinite;
+}
+
+@keyframes ghost-window {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+.urn__fog-a {
+  bottom: 0;
+  height: 46%;
+}
+
+.urn__fog-b {
+  bottom: -4%;
+  height: 30%;
+  opacity: calc(var(--fog-strength) * 1.3);
+}
+
+.urn__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 80%, var(--bg) 100%),
+    linear-gradient(90deg, color-mix(in srgb, var(--bg) 88%, transparent) 0%, color-mix(in srgb, var(--bg) 62%, transparent) 52%, transparent 80%);
+}
+
+/* ——— Título ——— */
+.urn__head {
+  position: relative;
+}
+
+.urn__eyebrow {
+  color: var(--accent);
+}
+
+.urn__title {
+  margin: clamp(0.8rem, 2vw, 1.4rem) 0 0 -0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 15vw, 15rem);
+  font-variation-settings: 'opsz' 40;
+  font-weight: 800;
+  line-height: 0.82;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  /* as letras se dissolvem na névoa */
+  background: linear-gradient(
+    180deg,
+    var(--ink) 18%,
+    color-mix(in srgb, var(--celeste-lilac) 70%, transparent) 62%,
+    transparent 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 calc(var(--level) * 34px) var(--spirit-glow));
+  padding-bottom: 0.06em;
+}
+
+:root[data-theme='light'] .urn__title {
+  background: linear-gradient(180deg, var(--ink) 20%, color-mix(in srgb, var(--accent) 65%, transparent) 70%, transparent 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ——— Grade ——— */
+.urn__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-top: clamp(-7rem, -7vw, -2rem);
+}
+
+.urn__content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  padding-top: clamp(5rem, 11vw, 10rem);
+}
+
+.urn__names,
+.urn__tagline,
+.urn__desc {
+  text-shadow: 0 1px 18px var(--bg), 0 0 2px var(--bg);
+}
+
+.urn__names {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.urn__pt {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.urn__aka {
+  color: var(--ink-3);
+  font-size: 0.86rem;
+}
+
+.urn__tagline {
+  max-width: 24ch;
+  font-family: var(--font-label);
+  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.urn__tagline::before {
+  content: '';
+  display: block;
+  width: 42px;
+  height: 2px;
+  margin-bottom: 1rem;
+  background: var(--spirit);
+  box-shadow: 0 0 14px var(--spirit-glow);
+}
+
+.urn__desc {
+  max-width: 48ch;
+  color: var(--ink-2);
+}
+
+.urn__quote {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0.6rem;
+  padding: 1rem 1.2rem;
+  border: 1px dashed var(--line-2);
+  border-radius: 4px;
+}
+
+.urn__quote p {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.urn__quote .label {
+  color: var(--ink-3);
+  font-size: 0.82rem;
+}
+
+/* ——— Urna ——— */
+.urn__art {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.urn__art-sticky {
+  position: sticky;
+  top: calc(var(--header-h) + 3vh);
+  display: grid;
+  justify-items: center;
+}
+
+.urn__art svg {
+  width: min(100%, 520px);
+  height: auto;
+  overflow: visible;
+}
+
+.urn__art .art-credit {
+  color: var(--ink-3);
+}
+
+.urn-art__float {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: urn-float 7s ease-in-out infinite;
+}
+
+.urn-art__core {
+  opacity: calc(0.25 + var(--level) * 0.75);
+}
+
+/* brilho sobrenatural em volta da urna, mais forte quando ela fala */
+.urn-art__image {
+  filter: drop-shadow(0 0 calc(6px + var(--level) * 22px) var(--spirit-glow))
+    drop-shadow(0 0 2px rgb(233 184 240 / 0.35)) drop-shadow(0 26px 24px rgb(0 0 0 / 0.45));
+}
+
+.urn-art__aura {
+  opacity: calc(0.55 + var(--level) * 0.7);
+}
+
+.urn-art__shadow {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: urn-shadow 7s ease-in-out infinite;
+}
+
+.urn-art__ring-flow {
+  animation: ring-flow 16s linear infinite;
+}
+
+.urn-art__glyphs path {
+  animation: glyph-float 6s ease-in-out infinite;
+}
+
+.urn-art__souls {
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+}
+
+.urn[data-playing] .urn-art__souls {
+  opacity: 1;
+}
+
+/* as almas só orbitam enquanto a Urna fala */
+.urn-art__souls-spin {
+  animation: souls 8s linear infinite;
+  animation-play-state: paused;
+}
+
+.urn[data-playing] .urn-art__souls-spin {
+  animation-play-state: running;
+}
+
+.urn-art__dust circle {
+  transform-box: fill-box;
+  animation: dust 10s ease-in-out infinite;
+}
+
+@keyframes urn-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+@keyframes urn-shadow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(0.86);
+    opacity: 0.28;
+  }
+}
+
+@keyframes ring-flow {
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+@keyframes glyph-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+@keyframes souls {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dust {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(6px, -16px);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 980px) {
+  .urn__grid {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
+
+  .urn__art {
+    order: -1;
+  }
+
+  .urn__art-sticky {
+    position: relative;
+    top: 0;
+  }
+
+  .urn__art svg {
+    width: min(78%, 400px);
+  }
+
+  .urn__content {
+    padding-top: 0;
+  }
+
+  .urn__shade {
+    background:
+      linear-gradient(to bottom, var(--bg) 0%, transparent 14%, transparent 30%, color-mix(in srgb, var(--bg) 70%, transparent) 55%, var(--bg) 100%);
+  }
+}

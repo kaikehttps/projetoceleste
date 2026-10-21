@@ -1,0 +1,117 @@
+.now-playing {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: min(520px, calc(100vw - 32px));
+  padding: 0.5rem 0.5rem 0.65rem;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--bg-2) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.6);
+  transform: translate(-50%, calc(100% + 40px));
+  opacity: 0;
+  transition:
+    transform 0.6s var(--ease-out),
+    opacity 0.4s;
+}
+
+.now-playing[data-visible] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.np__play {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.np__play svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.np__text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.25;
+  padding-inline: 0.3rem;
+}
+
+.np__label {
+  overflow: hidden;
+  color: var(--accent);
+  font-family: var(--font-label);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.np__title {
+  overflow: hidden;
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.np__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--ink-2);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.np__icon:hover {
+  background: var(--line);
+  color: var(--ink);
+}
+
+.np__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.np__bar {
+  --p: 0;
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.np__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--p));
+}

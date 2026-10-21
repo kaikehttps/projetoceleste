@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Deadlock Fã Dublado · Demonstração de voz · Kaike Alves</title>
+    <meta
+      name="description"
+      content="Demonstração independente de fã dublagem de Deadlock em português brasileiro: o Vendedor e a Urna Espiritual, por Kaike Alves."
+    />
+    <meta name="theme-color" content="#0e0b12" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Deadlock Fã Dublado em PT-BR · Duas vozes" />
+    <meta
+      property="og:description"
+      content="Uma cidade amaldiçoada. Duas vozes. Uma nova interpretação. Demonstração independente por Kaike Alves."
+    />
+    <meta property="og:image" content="./og-image.png" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script>
+      // Aplica o tema salvo antes da primeira pintura (evita o "flash" de tema errado).
+      try {
+        var t = localStorage.getItem('celeste-theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      Esta demonstração usa JavaScript para os players de áudio. Ative-o para ouvir as gravações.
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

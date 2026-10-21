@@ -1,0 +1,181 @@
+/*
+ * Tokens de design.
+ * Tema escuro: noite em Nova York, base quase preta com rosa e lilás só em detalhes.
+ * Tema claro: a mesma cidade ao amanhecer, papel envelhecido e tinta arroxeada.
+ */
+
+:root {
+  /* tipografia */
+  /* Bodoni: só nos títulos gigantes em caixa-alta, onde o contraste alto brilha */
+  --font-display: 'Bodoni Moda Variable', 'Bodoni 72', 'Didot', 'Playfair Display', Georgia, serif;
+  /* Fraunces: serifada editorial para frases, subtítulos e itálicos — traço firme, fácil de ler */
+  --font-serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-label: 'Big Shoulders Display Variable', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+
+  --fs-mega: clamp(3rem, 13.4vw, 13rem);
+  --fs-hero: clamp(3.4rem, 10vw, 9.5rem);
+  --fs-h1: clamp(2.6rem, 6.4vw, 6rem);
+  --fs-h2: clamp(2rem, 4.2vw, 3.6rem);
+  --fs-h3: clamp(1.35rem, 2.2vw, 1.8rem);
+  --fs-lead: clamp(1.25rem, 1.7vw, 1.5rem);
+  --fs-body: 1.125rem;
+  --fs-small: 1rem;
+  --fs-label: 0.92rem;
+
+  /* espaço e forma */
+  --gutter: clamp(1rem, 4.5vw, 4.5rem);
+  --section-y: clamp(5rem, 12vw, 10rem);
+  --maxw: 1320px;
+  --radius: 4px;
+  --header-h: 64px;
+
+  /* movimento */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cine: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* marca (da logo do Projeto Celeste) */
+  --celeste-pink: #d88ae4;
+  --celeste-lilac: #e9b8f0;
+  --celeste-white: #faf4fb;
+}
+
+/* ——— Tema escuro (padrão) ——— */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0e0b12;
+  --bg-2: #141019;
+  --bg-3: #1c1523;
+  --bg-raise: #221a2a;
+  --ink: #f5edf6;
+  --ink-2: #cdbfd2;
+  --ink-3: #998a9f;
+  --line: rgb(233 184 240 / 0.14);
+  --line-2: rgb(233 184 240 / 0.28);
+
+  --accent: #e6a6ef;
+  --accent-strong: #d88ae4;
+  --accent-ink: #1b0f20;
+  --accent-glow: rgb(216 138 228 / 0.42);
+  --spirit: #b8e36b;
+  --spirit-glow: rgb(184 227 107 / 0.5);
+  --amber: #f0bb6f;
+  --amber-glow: rgb(240 187 111 / 0.45);
+
+  --paper: #ebe1d3;
+  --paper-2: #ddd0bf;
+  --paper-ink: #2a1c2e;
+  --paper-ink-2: #5a4858;
+  --paper-accent: #9c3fa6;
+
+  --header-bg: rgb(14 11 18 / 0.74);
+  --shadow-deep: 0 40px 80px -30px rgb(0 0 0 / 0.85);
+
+  /* arte */
+  --sky-top: #07050a;
+  --sky-mid: #150e1c;
+  --sky-low: #2d1a38;
+  --haze: #d88ae4;
+  --haze-strength: 0.32;
+  --city-far: #2b1b35;
+  --city-far-2: #231629;
+  --city-mid: #170f1d;
+  --city-near: #09070c;
+  --window-warm: #f2c27b;
+  --window-pink: #ecc1f2;
+  --window-strength: 0.85;
+  --fog: #c7a3d6;
+  --fog-strength: 0.32;
+  --moon: #f7ecf6;
+  --star: #f3e3f5;
+  --beam: rgb(233 184 240 / 0.11);
+
+  --brick: #1d1418;
+  --brick-line: #120c0f;
+  --wood: #22161b;
+  --wood-2: #2f1f25;
+  --brass: #c9a26a;
+  --awning-a: #2a161c;
+  --awning-b: #4a1f33;
+  --shop-light: #f0bb6f;
+  --glass: rgb(58 34 30 / 0.9);
+
+  --street: #0c0a10;
+  --stone: #2a2230;
+  --stone-2: #3a3042;
+  --urn-body: #2a2132;
+  --urn-light: #4b3b55;
+  --urn-dark: #120d16;
+  --urn-trim: #c9a26a;
+}
+
+/* ——— Tema claro: Nova York ao amanhecer ——— */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f1e9e0;
+  --bg-2: #ebe1d6;
+  --bg-3: #e2d5ca;
+  --bg-raise: #f8f2ec;
+  --ink: #221729;
+  --ink-2: #4a3a50;
+  --ink-3: #75647b;
+  --line: rgb(48 32 57 / 0.14);
+  --line-2: rgb(48 32 57 / 0.3);
+
+  --accent: #93389e;
+  --accent-strong: #7f2c8a;
+  --accent-ink: #fff7fd;
+  --accent-glow: rgb(216 138 228 / 0.5);
+  --spirit: #4f7d12;
+  --spirit-glow: rgb(120 170 40 / 0.45);
+  --amber: #a8681f;
+  --amber-glow: rgb(240 170 90 / 0.5);
+
+  --paper: #fbf6ef;
+  --paper-2: #efe5d8;
+  --paper-ink: #2a1c2e;
+  --paper-ink-2: #5a4858;
+  --paper-accent: #8e3399;
+
+  --header-bg: rgb(241 233 224 / 0.8);
+  --shadow-deep: 0 40px 70px -34px rgb(60 30 60 / 0.45);
+
+  --sky-top: #e6d8e8;
+  --sky-mid: #efe2e5;
+  --sky-low: #f8dfe6;
+  --haze: #f3b8d6;
+  --haze-strength: 0.55;
+  --city-far: #cdb8d2;
+  --city-far-2: #bba2c3;
+  --city-mid: #8e7099;
+  --city-near: #3b2745;
+  --window-warm: #fff3dc;
+  --window-pink: #ffffff;
+  --window-strength: 0.55;
+  --fog: #ffffff;
+  --fog-strength: 0.55;
+  --moon: #ffffff;
+  --star: #ffffff;
+  --beam: rgb(255 255 255 / 0.3);
+
+  --brick: #5a3f48;
+  --brick-line: #4a323a;
+  --wood: #3b2830;
+  --wood-2: #4d353d;
+  --brass: #b88a4c;
+  --awning-a: #4d353d;
+  --awning-b: #7a3c58;
+  --shop-light: #ffcf86;
+  --glass: rgb(80 50 44 / 0.85);
+
+  --street: #6d5b72;
+  --stone: #9c8aa2;
+  --stone-2: #b4a3b8;
+  --urn-body: #4a3a52;
+  --urn-light: #6d5a77;
+  --urn-dark: #2a1e30;
+  --urn-trim: #b88a4c;
+}
