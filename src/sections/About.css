@@ -332,9 +332,43 @@
   }
 
   .about__fact {
-    grid-template-columns: 9.5rem minmax(0, 1fr);
-    align-items: baseline;
-    padding: 0.9rem 0;
+    gap: 0.3rem;
+    padding: 0.95rem 0;
+  }
+
+  .about__fact dt {
+    font-size: 0.88rem;
+  }
+
+  .dossier.container {
+    padding-inline: 10px;
+  }
+
+  .dossier__sheet {
+    padding: 1.6rem 1.15rem 1.4rem;
+  }
+
+  .dossier__text {
+    font-size: 1.1rem;
+    line-height: 1.65;
+  }
+
+  .dossier__first::first-letter {
+    font-size: 3.2em;
+    margin-top: 0.06em;
+  }
+
+  .dossier__top {
+    gap: 0.3rem 1rem;
+  }
+
+  .dossier__fig figcaption {
+    font-size: 0.86rem;
+  }
+
+  .dossier__sign {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .dossier__sheet {

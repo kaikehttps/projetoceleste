@@ -342,3 +342,13 @@ ol {
     transition-duration: 0.001ms !important;
   }
 }
+
+@media (max-width: 560px) {
+  body .art-credit,
+  body .shop__aka,
+  body .urn__aka,
+  body .urn__quote .label {
+    font-size: 0.88rem;
+    letter-spacing: 0.14em;
+  }
+}

@@ -180,18 +180,51 @@ li:last-child .collection__item {
   }
 }
 
-@media (max-width: 520px) {
-  .collection__item {
-    grid-template-columns: 1.8rem minmax(0, 1fr) 2.6rem 2.7rem;
-    gap: 0.6rem;
-    padding-inline: 0.9rem;
+@media (max-width: 560px) {
+  .collection__list ol {
+    counter-reset: fala;
   }
 
-  .collection__dur {
-    font-size: 0.95rem;
+  .collection__list li {
+    counter-increment: fala;
+  }
+
+  .collection__item {
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .collection__n {
+    display: none;
+  }
+
+  .collection__state {
+    order: -1;
   }
 
   .collection__title {
     white-space: normal;
+    line-height: 1.25;
+  }
+
+  .collection__sub {
+    white-space: normal;
+  }
+
+  .collection__sub::before {
+    content: counter(fala, decimal-leading-zero) ' · ';
+    color: var(--celeste-lilac);
+    font-family: var(--font-label);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .collection__dur {
+    font-size: 1rem;
+  }
+
+  .collection__head {
+    padding: 0.9rem;
   }
 }

@@ -512,15 +512,52 @@
   display: none;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 560px) {
   .vp {
-    --vp-play: 56px;
-    --vp-wave-h: 54px;
+    --vp-play: 58px;
+    --vp-wave-h: 58px;
+    gap: 1rem;
+    padding: 1.05rem 1rem 1rem;
   }
 
   .vp__head {
     flex-wrap: wrap;
     gap: 0.35rem 1rem;
+  }
+
+  /* título em cima, botão + waveform lado a lado, tempos embaixo em toda a largura */
+  .vp__main {
+    grid-template-areas:
+      'titles titles'
+      'play   slider'
+      'times  times';
+    gap: 0.85rem 0.9rem;
+  }
+
+  .vp__body {
+    display: contents;
+  }
+
+  .vp__titles {
+    grid-area: titles;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .vp__play {
+    grid-area: play;
+  }
+
+  .vp__slider {
+    grid-area: slider;
+  }
+
+  .vp__times {
+    grid-area: times;
+  }
+
+  .vp__skip button {
+    height: 44px;
   }
 
   .vp__chapters ul {
