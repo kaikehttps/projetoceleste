@@ -113,3 +113,18 @@ for (const [source, target] of Object.entries(FILES)) {
 
 writeFileSync(DATA_FILE, JSON.stringify({ envelopeHz: ENVELOPE_HZ, tracks: analysis }) + '\n')
 console.log(`Análise salva em ${DATA_FILE}`)
+
+// ——— Música de fundo (tela de entrada) ———
+// Extrai só o áudio do vídeo de referência e corta antes da vinheta final,
+// onde a trilha já terminou de decair, para o loop recomeçar limpo.
+const MUSIC_SOURCE = join(ROOT, 'Deadlock - New Main Menu Theme Music _ Soundtrack.mp4')
+const MUSIC_OUT = join(OUT_DIR, 'musica-tema.m4a')
+const MUSIC_END = 169.9
+if (existsSync(MUSIC_SOURCE)) {
+  const r = run([
+    '-v', 'error', '-y', '-i', MUSIC_SOURCE, '-vn', '-t', String(MUSIC_END),
+    '-af', `afade=t=out:st=${MUSIC_END - 1.4}:d=1.4`,
+    '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', MUSIC_OUT,
+  ])
+  console.log(r.status === 0 ? `✓ música → audio/musica-tema.m4a (${MUSIC_END} s)` : '! falha ao extrair a música')
+}

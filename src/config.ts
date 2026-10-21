@@ -25,9 +25,11 @@ export const site = {
    * a entrada mostra só "Entrar" e o botão de música não aparece.
    */
   music: {
-    src: 'audio/musica-tema.mp3',
-    /** Volume de fundo (0 a 1). */
-    volume: 0.14,
+    src: 'audio/musica-tema.m4a',
+    /** Volume na tela de entrada (0 a 1). A trilha original é bem alta (-10 LUFS). */
+    menuVolume: 0.24,
+    /** Volume de fundo enquanto a pessoa navega pelo site (0 a 1). */
+    volume: 0.06,
     title: 'Main Menu — Original Theme',
     file: 'music_title_155bpm',
     copyright: 'Valve Software — Deadlock',

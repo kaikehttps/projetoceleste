@@ -46,9 +46,10 @@ chance de colaborar com a equipe.
 
 ## ✦ O que tem nessa cidade
 
-**🎮 Uma tela de título.** Como num jogo: o nome surge letra por letra, você escolhe entrar com ou
-sem som, e o tema do menu de Deadlock segue baixinho ao fundo. Ele se cala sozinho quando uma
-dublagem começa.
+**🎮 Uma tela de título.** Como no jogo: Nova York ao entardecer e *"pressione qualquer tecla para
+começar"*. A música do menu de Deadlock entra, fitas de energia verde varrem a tela, e um menu de
+jogo leva você para dentro da cidade. Depois, a trilha segue baixinha ao fundo e se cala sozinha
+quando uma dublagem começa.
 
 **🌃 Uma capa de cinema.** Uma Nova York noturna, com holofotes, trem elevado, névoa e uma lua que
 vigia a cidade. Presta atenção no céu.

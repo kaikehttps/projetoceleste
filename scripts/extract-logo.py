@@ -105,3 +105,5 @@ OUT.mkdir(parents=True, exist_ok=True)
 for ink in (False, True):
     export("celeste-wordmark", (590, 60, 1090, 335), ink)
     export("celeste-lockup-full", (255, 60, 1090, 335), ink)
+# olho + DEADLOCK + FÃ DUBLADO EM PT-BR (logo central da tela de entrada, sempre sobre fundo escuro)
+export("deadlock-lockup", (255, 100, 590, 300))

@@ -7,13 +7,21 @@ import { useEffect } from 'react'
  */
 export function useScenes() {
   useEffect(() => {
+    // O efeito "rise" começa recortado até altura zero (clip-path), e o
+    // IntersectionObserver considera esse recorte: o elemento nunca "entraria"
+    // na tela. Para esses, quem é observado é o elemento pai.
+    const groups = new Map<Element, Element[]>()
+    document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+      const target = el.dataset.reveal === 'rise' && el.parentElement ? el.parentElement : el
+      groups.set(target, [...(groups.get(target) ?? []), el])
+    })
+
     const reveal = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-revealed')
-            reveal.unobserve(e.target)
-          }
+          if (!e.isIntersecting) continue
+          groups.get(e.target)?.forEach((el) => el.classList.add('is-revealed'))
+          reveal.unobserve(e.target)
         }
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
@@ -24,7 +32,7 @@ export function useScenes() {
       },
       { rootMargin: '120px 0px' },
     )
-    document.querySelectorAll('[data-reveal]').forEach((el) => reveal.observe(el))
+    groups.forEach((_, target) => reveal.observe(target))
     document.querySelectorAll('.scene').forEach((el) => scenes.observe(el))
     return () => {
       reveal.disconnect()

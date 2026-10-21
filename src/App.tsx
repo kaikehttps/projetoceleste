@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Header } from './components/Header'
-import { Intro } from './components/Intro'
+import { TitleScreen } from './components/intro/TitleScreen'
 import { Marquee } from './components/Marquee'
 import { NowPlaying } from './components/player/NowPlaying'
 import { useScenes } from './lib/useScenes'
@@ -25,7 +25,7 @@ export function App() {
   useScenes()
   return (
     <>
-      {intro && <Intro onDone={() => setIntro(false)} />}
+      {intro && <TitleScreen onDone={() => setIntro(false)} />}
       <div className="app" inert={intro}>
         <a className="skip-link" href="#vendedor">
           Pular para as demonstrações
