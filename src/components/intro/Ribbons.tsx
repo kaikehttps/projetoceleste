@@ -25,13 +25,10 @@ export function Ribbons({ intense = false, delay = 0 }: { intense?: boolean; del
           <stop offset="0.55" stopColor="var(--spirit)" />
           <stop offset="1" stopColor="#e9b8f0" />
         </linearGradient>
-        <filter id="ribbon-glow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="9" />
-        </filter>
       </defs>
       {PATHS.map((d, i) => (
         <g key={i} className="ribbon">
-          <path d={d} pathLength={1000} className="ribbon__glow" filter="url(#ribbon-glow)" style={{ animationDelay: `${delay + i * 0.16}s` }} />
+          <path d={d} pathLength={1000} className="ribbon__glow" style={{ animationDelay: `${delay + i * 0.16}s` }} />
           <path d={d} pathLength={1000} className="ribbon__core" style={{ animationDelay: `${delay + i * 0.16}s` }} />
           <path d={d} pathLength={1000} className="ribbon__trail" style={{ animationDelay: `${delay + i * 0.16 + 0.12}s` }} />
         </g>

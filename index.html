@@ -17,6 +17,15 @@
     />
     <meta property="og:image" content="./og-image.png" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      /* fundo escuro desde o primeiro quadro: evita o clarão branco antes do CSS carregar */
+      html,
+      body {
+        margin: 0;
+        background: #0b0919;
+        color-scheme: dark;
+      }
+    </style>
     <script>
       // Aplica o tema salvo antes da primeira pintura (evita o "flash" de tema errado).
       try {

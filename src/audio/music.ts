@@ -26,6 +26,8 @@ export type MusicState = {
   enabled: boolean
   /** Está soando de fato (ligada, sem dublagem tocando, aba visível). */
   audible: boolean
+  /** O navegador bloqueou o som automático; espera o primeiro gesto. */
+  blocked: boolean
   mode: MusicMode
 }
 
@@ -42,7 +44,7 @@ const BANDS: [number, number][] = [
 ]
 
 class BackgroundMusic {
-  private state: MusicState = { available: null, enabled: false, audible: false, mode: 'menu' }
+  private state: MusicState = { available: null, enabled: false, audible: false, blocked: false, mode: 'menu' }
   private listeners = new Set<() => void>()
   private audio?: HTMLAudioElement
   private ctx?: AudioContext
@@ -234,7 +236,7 @@ class BackgroundMusic {
         if (id !== this.applyId) return
         if (ok) this.disarm()
         else this.fadeTo(0, 0.01)
-        this.set({ audible: ok })
+        this.set({ audible: ok, blocked: !ok && this.armed })
       })
       return
     }
@@ -244,7 +246,7 @@ class BackgroundMusic {
     } else {
       audio.pause()
     }
-    this.set({ audible: false })
+    this.set({ audible: false, blocked: false })
   }
 
   /** Espera o primeiro gesto do visitante para liberar o som bloqueado. */

@@ -88,9 +88,6 @@ function NearFrame() {
           <stop offset="0" stopColor="var(--near-face)" />
           <stop offset="1" stopColor="var(--near-edge)" />
         </linearGradient>
-        <filter id="tc-neon" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" />
-        </filter>
       </defs>
 
       {/* prédio da esquerda: fachada + face lateral em perspectiva */}
@@ -122,7 +119,7 @@ function NearFrame() {
         <rect x="1180" y="300" width="44" height="190" rx="4" fill="#120b16" stroke="#3a2840" strokeWidth="2" />
         <path d="M1224 330H1240M1224 460H1240" stroke="#3a2840" strokeWidth="4" />
         <g transform="translate(1202 395) scale(1.5) translate(-12 -12)">
-          <path d={STAR4_PATH} fill="none" stroke="var(--celeste-pink)" strokeWidth="3.4" filter="url(#tc-neon)" />
+          <path d={STAR4_PATH} fill="none" stroke="var(--celeste-pink)" strokeWidth="5" opacity="0.45" />
           <path d={STAR4_PATH} fill="none" stroke="#ffe6fb" strokeWidth="1.2" />
         </g>
         {[322, 346, 444, 468].map((y) => (

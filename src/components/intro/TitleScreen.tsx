@@ -31,7 +31,7 @@ const LEAVE_MS = 1750
 const IGNORED_KEYS = new Set(['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'ContextMenu'])
 
 export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
-  const { available, enabled } = useMusic()
+  const { available, enabled, blocked } = useMusic()
   const [phase, setPhase] = useState<Phase>('title')
   const [burst, setBurst] = useState(0)
   const phaseRef = useRef<Phase>('title')
@@ -186,7 +186,7 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
       <div className="title__scene">
         <TitleCity />
       </div>
-      <Ribbons key={`r${burst}`} intense={burst > 0} delay={burst > 0 ? 0 : 0.5} />
+      {burst > 0 && <Ribbons key={`r${burst}`} intense />}
       <div className="title__flash" aria-hidden="true" />
 
       <div className="title__ui">
@@ -238,6 +238,13 @@ export function TitleScreen({ onDone }: { onDone: (target: string) => void }) {
           </div>
         )}
       </div>
+
+      {hasMusic && blocked && (
+        <p className="title__unmute" role="status">
+          <Volume2 aria-hidden="true" />
+          Clique em qualquer lugar para ligar o som
+        </p>
+      )}
 
       {/* cantos, como os de uma tela de jogo */}
       <p className="title__corner title__corner--tl label">Kaike Alves apresenta</p>
