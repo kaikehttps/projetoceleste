@@ -282,7 +282,13 @@
 
 .hero__byline {
   color: var(--ink-2);
-  font-size: var(--fs-lead);
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+}
+
+@media (min-width: 761px) {
+  .hero__byline {
+    white-space: nowrap;
+  }
 }
 
 .hero__byline strong {
