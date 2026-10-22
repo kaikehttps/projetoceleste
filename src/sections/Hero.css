@@ -456,26 +456,6 @@
   }
 }
 
-/* notebooks com pouca altura: a capa inteira cabe na primeira tela */
-@media (max-height: 820px) and (min-width: 761px) {
-  .hero__content {
-    padding-top: calc(var(--header-h) + 3vh);
-    padding-bottom: max(24vh, 9rem);
-  }
-
-  .hero__title-main {
-    font-size: min(var(--fs-mega), 21vh);
-  }
-
-  .hero__copy {
-    margin-top: 1.2rem;
-  }
-
-  .hero__actions {
-    margin-top: 1.4rem;
-  }
-}
-
 @media (max-width: 1180px) {
   .hero__side {
     display: none;
