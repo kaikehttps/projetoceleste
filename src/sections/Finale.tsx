@@ -59,13 +59,13 @@ export function Finale() {
           </div>
           <h2 className="finale__title" id="finale-title">
             <span data-reveal="rise" style={delay(1)}>
-              A voz é sua.
+              A cidade
             </span>
             <span data-reveal="rise" style={delay(3)}>
-              A próxima cena
+              nunca dorme.
             </span>
             <em data-reveal="rise" style={delay(5)}>
-              também.
+              Eu também não.
             </em>
           </h2>
         </div>

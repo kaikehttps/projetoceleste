@@ -82,4 +82,4 @@ sozinho: a cidade espera você apertar o play.
   </sub>
 </p>
 
-<p align="center"><em>A voz é sua. A próxima cena também.</em></p>
+<p align="center"><em>A cidade nunca dorme. Eu também não.</em></p>
