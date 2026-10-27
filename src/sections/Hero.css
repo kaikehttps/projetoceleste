@@ -60,6 +60,48 @@
   will-change: transform;
 }
 
+.moon__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* O olho espia: quase sempre parado no centro, olha para um lado, volta,
+   e depois para o outro. Só a pupila se move (transform na própria camada). */
+.moon__pupil {
+  will-change: transform;
+  animation: moon-look 17s ease-in-out infinite;
+}
+
+@keyframes moon-look {
+  0%,
+  22% {
+    transform: translate(0, 0);
+  }
+  27%,
+  37% {
+    transform: translate(-10%, 1.5%);
+  }
+  42%,
+  63% {
+    transform: translate(0, 0);
+  }
+  67%,
+  74% {
+    transform: translate(9%, -1%);
+  }
+  76%,
+  79% {
+    transform: translate(10.5%, 1%);
+  }
+  84%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 .moon__spokes {
   transform-origin: 300px 300px;
 }

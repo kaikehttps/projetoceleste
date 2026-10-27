@@ -50,46 +50,54 @@ export function StarField({ seed = 7, count = 130, sparkles = 9, className = '' 
 export function WatchingMoon({ className = '' }) {
   const spokes = [0, 45, 90, 135, 180, 225, 270, 315]
   return (
-    <svg className={className} viewBox="0 0 600 600" aria-hidden="true">
-      <defs>
-        <radialGradient id="moon-halo" cx="50%" cy="50%" r="50%">
-          <stop offset="0" stopColor="var(--moon)" stopOpacity="0.38" />
-          <stop offset="0.22" stopColor="var(--haze)" stopOpacity="0.16" />
-          <stop offset="0.6" stopColor="var(--haze)" stopOpacity="0.04" />
-          <stop offset="1" stopColor="var(--haze)" stopOpacity="0" />
-        </radialGradient>
-        <radialGradient id="moon-face" cx="40%" cy="36%" r="70%">
-          <stop offset="0" stopColor="var(--moon)" />
-          <stop offset="0.7" stopColor="var(--moon)" stopOpacity="0.92" />
-          <stop offset="1" stopColor="var(--celeste-lilac)" stopOpacity="0.85" />
-        </radialGradient>
-      </defs>
-      <circle cx="300" cy="300" r="300" fill="url(#moon-halo)" />
-      <g className="moon__eye" fill="none" stroke="var(--star)">
-        <circle cx="300" cy="300" r="262" strokeOpacity="0.07" />
-        <circle cx="300" cy="300" r="196" strokeOpacity="0.1" strokeDasharray="1.5 7" />
-        <path d="M28 300Q300 70 572 300Q300 530 28 300Z" strokeOpacity="0.15" strokeWidth="1.2" />
-        <path d="M70 300Q300 128 530 300Q300 472 70 300Z" strokeOpacity="0.07" />
-      </g>
-      <g className="moon__spokes" stroke="var(--star)" strokeOpacity="0.09">
-        {spokes.map((a) => (
-          <line key={a} x1="300" y1="186" x2="300" y2="42" transform={`rotate(${a} 300 300)`} />
-        ))}
-      </g>
-      <circle cx="300" cy="300" r="84" fill="url(#moon-face)" />
-      <g fill="var(--celeste-lilac)" opacity="0.16">
-        <circle cx="272" cy="282" r="13" />
-        <circle cx="322" cy="318" r="9" />
-        <circle cx="318" cy="268" r="5" />
-        <circle cx="280" cy="330" r="6" />
-      </g>
-      <path
-        d={STAR4_PATH}
-        fill="var(--celeste-lilac)"
-        transform="translate(372 222) scale(1.5) translate(-12 -12)"
-        className="moon__glint"
-      />
-    </svg>
+    <div className={`moon ${className}`} aria-hidden="true">
+      <svg className="moon__layer" viewBox="0 0 600 600">
+        <defs>
+          <radialGradient id="moon-halo" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stopColor="var(--moon)" stopOpacity="0.38" />
+            <stop offset="0.22" stopColor="var(--haze)" stopOpacity="0.16" />
+            <stop offset="0.6" stopColor="var(--haze)" stopOpacity="0.04" />
+            <stop offset="1" stopColor="var(--haze)" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        <circle cx="300" cy="300" r="300" fill="url(#moon-halo)" />
+        <g className="moon__eye" fill="none" stroke="var(--star)">
+          <circle cx="300" cy="300" r="262" strokeOpacity="0.07" />
+          <circle cx="300" cy="300" r="196" strokeOpacity="0.1" strokeDasharray="1.5 7" />
+          <path d="M28 300Q300 70 572 300Q300 530 28 300Z" strokeOpacity="0.15" strokeWidth="1.2" />
+          <path d="M70 300Q300 128 530 300Q300 472 70 300Z" strokeOpacity="0.07" />
+        </g>
+        <g className="moon__spokes" stroke="var(--star)" strokeOpacity="0.09">
+          {spokes.map((a) => (
+            <line key={a} x1="300" y1="186" x2="300" y2="42" transform={`rotate(${a} 300 300)`} />
+          ))}
+        </g>
+      </svg>
+
+      {/* a pupila: camada própria, que olha para os lados de vez em quando */}
+      <svg className="moon__layer moon__pupil" viewBox="0 0 600 600">
+        <defs>
+          <radialGradient id="moon-face" cx="40%" cy="36%" r="70%">
+            <stop offset="0" stopColor="var(--moon)" />
+            <stop offset="0.7" stopColor="var(--moon)" stopOpacity="0.92" />
+            <stop offset="1" stopColor="var(--celeste-lilac)" stopOpacity="0.85" />
+          </radialGradient>
+        </defs>
+        <circle cx="300" cy="300" r="84" fill="url(#moon-face)" />
+        <g fill="var(--celeste-lilac)" opacity="0.16">
+          <circle cx="272" cy="282" r="13" />
+          <circle cx="322" cy="318" r="9" />
+          <circle cx="318" cy="268" r="5" />
+          <circle cx="280" cy="330" r="6" />
+        </g>
+        <path
+          d={STAR4_PATH}
+          fill="var(--celeste-lilac)"
+          transform="translate(372 222) scale(1.5) translate(-12 -12)"
+          className="moon__glint"
+        />
+      </svg>
+    </div>
   )
 }
 
