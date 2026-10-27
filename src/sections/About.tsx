@@ -1,26 +1,22 @@
 import { ArrowRight } from 'lucide-react'
 import { Microphone } from '../components/art/Microphone'
 import { Star4 } from '../components/art/Star4'
-import { VoicePlayer } from '../components/player/VoicePlayer'
+import { SealedPlayer } from '../components/player/SealedPlayer'
 import { site } from '../config'
-import { characterTracks, introTrack, urnTracks } from '../data/recordings'
+import { allTracks } from '../data/recordings'
 import { delay } from '../lib/style'
 import './About.css'
 
-const interpretationSeconds = characterTracks.reduce((s, t) => s + t.duration, 0)
-const minutes = Math.floor(interpretationSeconds / 60)
-const seconds = Math.round(interpretationSeconds % 60)
-const introMinutes = Math.max(1, Math.round(introTrack.duration / 60))
+const totalSeconds = allTracks.reduce((s, t) => s + t.duration, 0)
+const minutes = Math.floor(totalSeconds / 60)
+const seconds = Math.round(totalSeconds % 60)
 
 const FACTS = [
   { term: 'Formato', value: 'Fã dublagem independente' },
   { term: 'Idioma', value: 'Português brasileiro' },
   { term: 'Personagens', value: 'O Vendedor · A Urna Espiritual' },
-  {
-    term: 'Gravações',
-    value: `${characterTracks.length} interpretações — 1 do Vendedor, ${urnTracks.length} da Urna`,
-  },
-  { term: 'Tempo de voz', value: `${minutes} min ${String(seconds).padStart(2, '0')} s de interpretação` },
+  { term: 'Áudios', value: 'Falas do Vendedor e da Urna' },
+  { term: 'Duração', value: `${minutes} min ${String(seconds).padStart(2, '0')} s de falas` },
   { term: 'Para', value: 'Projeto Celeste — Deadlock Fã Dublado em PT-BR' },
 ]
 
@@ -103,12 +99,9 @@ export function About() {
             <div className="dossier__audio">
               <div className="dossier__audio-head">
                 <p className="label">Gravação de apresentação</p>
-                <p className="dossier__audio-note">
-                  Cerca de {introMinutes} minutos na minha própria voz: quem sou, por que escolhi esses dois
-                  personagens e de onde vem essa vontade de dublar.
-                </p>
+                <p className="dossier__audio-note">Esta gravação já foi retirada do ar.</p>
               </div>
-              <VoicePlayer id="apresentacao" track={introTrack} label="Introdução · Kaike" variant="dossier" />
+              <SealedPlayer label="Introdução · Kaike" tone="paper" />
             </div>
 
             <footer className="dossier__sign">

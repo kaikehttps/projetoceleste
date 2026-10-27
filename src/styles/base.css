@@ -11,6 +11,14 @@ html {
   background: var(--bg);
 }
 
+/* Telas grandes: o site aparece na escala de 75%, como se o navegador estivesse com zoom 75%.
+   (O zoom do navegador continua funcionando por cima disso.) */
+@media (min-width: 1500px) {
+  html {
+    zoom: 0.75;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -19,7 +27,7 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: calc(100 * var(--vh));
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -170,7 +178,7 @@ ol {
 }
 
 .label-row .rule {
-  flex: 0 0 clamp(2rem, 6vw, 5rem);
+  flex: 0 0 clamp(2rem, calc(6 * var(--vw)), 5rem);
   height: 1px;
   background: currentColor;
   opacity: 0.45;

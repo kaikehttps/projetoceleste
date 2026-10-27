@@ -2,9 +2,9 @@ import { useRef } from 'react'
 import { Fog } from '../components/art/Fog'
 import { SpiritUrn } from '../components/art/SpiritUrn'
 import { UrnStreet } from '../components/art/UrnStreet'
-import { TrackCollection } from '../components/player/TrackCollection'
+import { VoicePlayer } from '../components/player/VoicePlayer'
 import { useIsPlaying, useVoiceGlow } from '../audio/hooks'
-import { urnTracks } from '../data/recordings'
+import { urnTrack } from '../data/recordings'
 import { delay } from '../lib/style'
 import './SoulUrn.css'
 
@@ -47,8 +47,8 @@ export function SoulUrn() {
           </p>
 
           <p className="urn__desc" data-reveal style={delay(2)}>
-            Nesta demonstração, exploro uma interpretação vocal da Urna Espiritual, buscando transmitir presença,
-            personalidade e a atmosfera sobrenatural de Deadlock por meio da voz.
+            A Urna Espiritual de Deadlock: presença, personalidade e a atmosfera sobrenatural do jogo, só por meio da
+            voz.
           </p>
 
           <blockquote className="urn__quote" data-reveal style={delay(3)}>
@@ -76,13 +76,12 @@ export function SoulUrn() {
         </figure>
 
         <div className="urn__listen" data-reveal style={delay(3)}>
-          <TrackCollection
+          <VoicePlayer
             id={PLAYER_ID}
-            tracks={urnTracks}
+            track={urnTrack}
+            label="Registro Nº 002 · A Urna"
             variant="urn"
-            itemLabel="Fala"
-            labelPrefix="A Urna"
-            title="Coleção de falas"
+            chaptersLabel="Pule para uma situação"
           />
         </div>
       </div>

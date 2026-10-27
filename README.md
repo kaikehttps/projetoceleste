@@ -16,8 +16,8 @@ rua que não aparece no mapa, uma loja continua com a luz acesa. Do outro lado d
 espera alguém para carregá-la… e ela **não para de falar**.
 
 Esta página é essa noite. Ela foi feita para apresentar ao
-**Projeto Celeste — Deadlock Fã Dublado em PT-BR** duas interpretações de personagens que não são
-heróis, mas sempre roubam a cena.
+**Projeto Celeste — Deadlock Fã Dublado em PT-BR** dois personagens que não são heróis, mas sempre
+roubam a cena.
 
 ---
 
@@ -25,10 +25,8 @@ heróis, mas sempre roubam a cena.
 
 | | Registro | Personagem | O que você vai ouvir |
 | :-: | --- | --- | --- |
-| 🕯️ | **Nº 001** | **O Vendedor** · *The Shopkeeper* | Falas de compra para Abrams, Yamato, Dynamo, Lash, McGinnis, Paradox e Haze |
-| ⚱️ | **Nº 002** | **A Urna Espiritual** · *Soul Urn* | 7 falas: a coleta, os espíritos, a espera, a entrega e as interações com Abrams, Drifter, Vyper, Mina e… **Celeste** |
-
-Além delas, há uma gravação em que eu me apresento e outra de despedida, na minha própria voz.
+| 🕯️ | **Nº 001** | **O Vendedor** · *The Shopkeeper* | As falas dele para cada herói, com atalho para pular direto para Abrams, Bebop, Haze, Lash, Paradox, Yamato e outros |
+| ⚱️ | **Nº 002** | **A Urna Espiritual** · *Soul Urn* | As falas dela: reunindo almas, esperando, sendo coletada, sob fogo, largada no chão e a entrega |
 
 ---
 
@@ -55,7 +53,8 @@ quando uma dublagem começa.
 vigia a cidade. Presta atenção no céu.
 
 **📁 Um arquivo secreto.** A apresentação é uma ficha de papel envelhecido, com clipe, carimbo e o
-desenho de um microfone antigo.
+desenho de um microfone antigo. A gravação que ficava ali foi retirada: no lugar, uma fita de isolamento
+de "arquivo encerrado".
 
 **🕯️ Uma loja escondida.** Vitrine com letreiro dourado, frascos brilhando e uma lâmpada que
 **acende conforme a voz do Vendedor**.
@@ -65,8 +64,8 @@ desenho de um microfone antigo.
 
 **🌙 Dia e noite.** Dá para alternar entre a madrugada e a mesma cidade ao amanhecer.
 
-Cada gravação tem o seu próprio player, com atalhos para pular direto para cada herói. Nada toca
-sozinho: a cidade espera você apertar o play.
+Cada áudio tem o seu próprio player, com atalhos para pular direto para cada herói ou situação. Nada
+toca sozinho: a cidade espera você apertar o play.
 
 ---
 
@@ -75,6 +74,8 @@ sozinho: a cidade espera você apertar o play.
     ✦ Projeto independente de fã, sem vínculo oficial ou patrocínio da Valve ou do Projeto Celeste.<br />
     Deadlock, seus personagens e demais propriedades intelectuais pertencem aos respectivos titulares.<br />
     Os cenários desta página são ilustrações originais e não representam artes oficiais do jogo.<br />
+    As falas do Vendedor e da Urna são as originais do jogo (© Valve). Esta página começou como um teste de
+    fã dublagem, e as gravações de voz feitas para ele foram retiradas.<br />
     ♪ Música de fundo: <em>Main Menu — Original Theme</em> (music_title_155bpm) · Deadlock © Valve Software.
     Trilha apresentada pelo canal <a href="https://www.youtube.com/@DeadlockAir">Dead Air</a>, com edição de
     <a href="https://www.youtube.com/@DeadAirJacky">Jacky Powers</a> e design de

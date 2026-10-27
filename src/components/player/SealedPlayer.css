@@ -1,0 +1,183 @@
+/*
+ * Fita de isolamento sobre um player retirado.
+ * Papel envelhecido e tinta: as cores vêm do tema da ficha (paper) ou do escuro.
+ */
+.sealed {
+  --tape-a-bg: #2a1c2e;
+  --tape-a-ink: #efe3d2;
+  --tape-b-bg: #9c3fa6;
+  --tape-b-ink: #fbf1ec;
+  --ghost-ink: #5a4858;
+  --ghost-line: rgb(42 28 46 / 0.3);
+  position: relative;
+  min-height: 9.6rem;
+  overflow: hidden;
+  border: 1px dashed var(--ghost-line);
+  border-radius: 6px;
+  cursor: not-allowed;
+  user-select: none;
+  -webkit-user-select: none;
+  isolation: isolate;
+}
+
+.sealed--dark {
+  --tape-a-bg: #e9dcc6;
+  --tape-a-ink: #2a1c2e;
+  --tape-b-bg: #3a2147;
+  --tape-b-ink: #e9b8f0;
+  --ghost-ink: #a998ae;
+  --ghost-line: rgb(233 184 240 / 0.28);
+}
+
+/* ——— o player de antes, apagado ——— */
+.sealed__ghost {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  color: var(--ghost-ink);
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.sealed__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-label);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.sealed__main {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.sealed__btn {
+  width: 3.4rem;
+  height: 3.4rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.sealed__body {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.sealed__title {
+  width: 46%;
+  height: 0.9rem;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.sealed__line {
+  height: 0;
+  border-top: 2px dotted currentColor;
+}
+
+.sealed__times {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-label);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ——— fitas ——— */
+.sealed__tape {
+  position: absolute;
+  left: -8%;
+  width: 116%;
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  overflow: hidden;
+  /* as pontas "rasgadas" ficam para fora da caixa, cortadas pelo overflow */
+  box-shadow:
+    0 6px 14px -4px rgb(0 0 0 / 0.45),
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    inset 0 -1px 0 rgb(0 0 0 / 0.25);
+  pointer-events: none;
+}
+
+.sealed__tape::after {
+  /* desgaste do papel por cima da fita */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/textures/paper.webp') 0 0 / 256px repeat;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+.sealed__tape--a {
+  top: 24%;
+  background: var(--tape-a-bg);
+  color: var(--tape-a-ink);
+  transform: rotate(-7deg);
+  z-index: 2;
+}
+
+.sealed__tape--b {
+  top: 52%;
+  background: var(--tape-b-bg);
+  color: var(--tape-b-ink);
+  transform: rotate(6deg);
+  z-index: 3;
+}
+
+.sealed__run {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 1.1rem;
+  padding-left: 1rem;
+  font-family: var(--font-label);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sealed__run .star4 {
+  width: 0.7em;
+  height: 0.7em;
+  opacity: 0.85;
+}
+
+@media (max-width: 560px) {
+  .sealed {
+    min-height: 8.6rem;
+  }
+
+  .sealed__ghost {
+    padding: 0.9rem;
+  }
+
+  .sealed__main {
+    grid-template-columns: 2.8rem minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .sealed__btn {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .sealed__tape {
+    height: 2.2rem;
+  }
+
+  .sealed__run {
+    font-size: 0.95rem;
+  }
+}

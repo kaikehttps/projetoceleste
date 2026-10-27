@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  min-height: max(660px, 100svh);
+  min-height: max(660px, calc(100 * var(--svh)));
   overflow: hidden;
   isolation: isolate;
 }
@@ -51,10 +51,10 @@
 }
 
 .hero__moon {
-  top: max(9vh, 70px);
+  top: max(calc(9 * var(--vh)), 70px);
   left: auto;
-  right: 3vw;
-  width: min(50vw, 700px);
+  right: calc(3 * var(--vw));
+  width: min(calc(50 * var(--vw)), 700px);
   height: auto;
   aspect-ratio: 1;
   will-change: transform;
@@ -83,9 +83,9 @@
 .hero__beam {
   position: absolute;
   bottom: 14%;
-  width: 26vw;
+  width: calc(26 * var(--vw));
   min-width: 220px;
-  height: 125vh;
+  height: calc(125 * var(--vh));
   background: linear-gradient(to top, var(--beam), transparent 80%);
   clip-path: polygon(47% 100%, 53% 100%, 100% 0, 0 0);
   transform-origin: 50% 100%;
@@ -194,15 +194,15 @@
     'actions dedication';
   align-items: end;
   gap: 0 2.5rem;
-  padding-top: calc(var(--header-h) + 8vh);
-  padding-bottom: max(28vh, 11rem);
-  padding-bottom: max(28svh, 11rem);
+  padding-top: calc(var(--header-h) + calc(8 * var(--vh)));
+  padding-bottom: max(calc(28 * var(--vh)), 11rem);
+  padding-bottom: max(calc(28 * var(--svh)), 11rem);
   will-change: transform;
 }
 
 .hero__kicker {
   grid-area: kicker;
-  margin-bottom: clamp(1rem, 2.4vw, 1.8rem);
+  margin-bottom: clamp(1rem, calc(2.4 * var(--vw)), 1.8rem);
   color: var(--ink-2);
 }
 
@@ -245,10 +245,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.8em;
-  margin-top: clamp(1rem, 2.2vw, 1.8rem);
+  margin-top: clamp(1rem, calc(2.2 * var(--vw)), 1.8rem);
   color: var(--accent);
   font-family: var(--font-label);
-  font-size: clamp(0.95rem, 2.1vw, 1.6rem);
+  font-size: clamp(0.95rem, calc(2.1 * var(--vw)), 1.6rem);
   font-weight: 800;
   letter-spacing: 0.42em;
   text-transform: uppercase;
@@ -268,13 +268,13 @@
   grid-area: copy;
   display: grid;
   gap: 0.5rem;
-  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+  margin-top: clamp(1.4rem, calc(3 * var(--vw)), 2.4rem);
   max-width: 34rem;
 }
 
 .hero__tagline {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-size: clamp(1.6rem, calc(2.8 * var(--vw)), 2.5rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1.18;
@@ -282,7 +282,7 @@
 
 .hero__byline {
   color: var(--ink-2);
-  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+  font-size: clamp(0.95rem, calc(1.25 * var(--vw)), 1.15rem);
 }
 
 @media (min-width: 761px) {
@@ -301,7 +301,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  margin-top: clamp(1.6rem, calc(3 * var(--vw)), 2.4rem);
 }
 
 .hero__dedication {
@@ -335,7 +335,7 @@
 }
 
 .hero__celeste {
-  width: clamp(150px, 14vw, 210px);
+  width: clamp(150px, calc(14 * var(--vw)), 210px);
   filter: drop-shadow(0 0 20px rgb(216 138 228 / 0.45));
 }
 
@@ -351,9 +351,9 @@
 /* selo editorial giratório, carimbado no canto do título */
 .hero__seal {
   position: absolute;
-  top: calc(var(--header-h) + 6vh);
+  top: calc(var(--header-h) + calc(6 * var(--vh)));
   right: var(--gutter);
-  width: clamp(104px, 10vw, 140px);
+  width: clamp(104px, calc(10 * var(--vw)), 140px);
   overflow: visible;
 }
 
@@ -397,12 +397,12 @@
 }
 
 .hero__side--left {
-  left: clamp(0.6rem, 1.4vw, 1.4rem);
+  left: clamp(0.6rem, calc(1.4 * var(--vw)), 1.4rem);
   transform: translateY(-50%) rotate(180deg);
 }
 
 .hero__side--right {
-  right: clamp(0.6rem, 1.4vw, 1.4rem);
+  right: clamp(0.6rem, calc(1.4 * var(--vw)), 1.4rem);
   transform: translateY(-50%);
 }
 
@@ -410,7 +410,7 @@
 .hero__scroll {
   position: absolute;
   left: 50%;
-  bottom: clamp(1rem, 3vh, 2rem);
+  bottom: clamp(1rem, calc(3 * var(--vh)), 2rem);
   z-index: 2;
   display: grid;
   justify-items: center;
@@ -477,16 +477,16 @@
       'copy    copy'
       'actions actions'
       'seal    dedication';
-    padding-top: calc(var(--header-h) + 42vw);
-    padding-bottom: max(17vh, 7.5rem);
-    padding-bottom: max(17svh, 7.5rem);
+    padding-top: calc(var(--header-h) + calc(42 * var(--vw)));
+    padding-bottom: max(calc(17 * var(--vh)), 7.5rem);
+    padding-bottom: max(calc(17 * var(--svh)), 7.5rem);
   }
 
   /* no celular a lua sobe para o canto, longe do título */
   .hero__moon {
-    top: calc(var(--header-h) - 30vw);
-    right: -36vw;
-    width: 100vw;
+    top: calc(var(--header-h) - calc(30 * var(--vw)));
+    right: calc(-36 * var(--vw));
+    width: calc(100 * var(--vw));
   }
 
   .hero__far {
@@ -504,7 +504,7 @@
   }
 
   .hero__beam {
-    width: 60vw;
+    width: calc(60 * var(--vw));
   }
 
   .hero__actions {

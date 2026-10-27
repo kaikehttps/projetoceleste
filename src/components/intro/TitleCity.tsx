@@ -159,10 +159,10 @@ function Ledge() {
 
 /** Almas sobre o telhado: elementos próprios, flutuam só com transform/opacity. */
 const SOULS = [
-  { left: '33.5%', bottom: '44%', width: '3.2vmin', animationDelay: '0s' },
-  { left: '36.4%', bottom: '58%', width: '2.3vmin', animationDelay: '-1.6s' },
-  { left: '31.8%', bottom: '64%', width: '1.7vmin', animationDelay: '-3.2s' },
-  { left: '73.6%', bottom: '40%', width: '2.1vmin', animationDelay: '-4.8s' },
+  { left: '33.5%', bottom: '44%', width: 'calc(3.2 * var(--vmin))', animationDelay: '0s' },
+  { left: '36.4%', bottom: '58%', width: 'calc(2.3 * var(--vmin))', animationDelay: '-1.6s' },
+  { left: '31.8%', bottom: '64%', width: 'calc(1.7 * var(--vmin))', animationDelay: '-3.2s' },
+  { left: '73.6%', bottom: '40%', width: 'calc(2.1 * var(--vmin))', animationDelay: '-4.8s' },
 ]
 
 export function TitleCity() {

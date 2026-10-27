@@ -56,9 +56,9 @@
 }
 
 .urn__title {
-  margin: clamp(0.8rem, 2vw, 1.4rem) 0 0 -0.04em;
+  margin: clamp(0.8rem, calc(2 * var(--vw)), 1.4rem) 0 0 -0.04em;
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 15vw, 15rem);
+  font-size: clamp(2.6rem, calc(15 * var(--vw)), 15rem);
   font-variation-settings: 'opsz' 40;
   font-weight: 800;
   line-height: 0.82;
@@ -87,9 +87,9 @@
 .urn__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  column-gap: clamp(2rem, 5vw, 5rem);
+  column-gap: clamp(2rem, calc(5 * var(--vw)), 5rem);
   row-gap: 1.5rem;
-  margin-top: clamp(-7rem, -7vw, -2rem);
+  margin-top: clamp(-7rem, calc(-7 * var(--vw)), -2rem);
 }
 
 .urn__intro,
@@ -103,7 +103,7 @@
   display: grid;
   gap: 1.5rem;
   align-content: start;
-  padding-top: clamp(5rem, 11vw, 10rem);
+  padding-top: clamp(5rem, calc(11 * var(--vw)), 10rem);
 }
 
 .urn__names,
@@ -119,7 +119,7 @@
 
 .urn__pt {
   font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+  font-size: clamp(2.1rem, calc(3.8 * var(--vw)), 3.3rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1;
@@ -133,7 +133,7 @@
 .urn__tagline {
   max-width: 24ch;
   font-family: var(--font-label);
-  font-size: clamp(1.45rem, 2.3vw, 2rem);
+  font-size: clamp(1.45rem, calc(2.3 * var(--vw)), 2rem);
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.2;
@@ -187,7 +187,7 @@
 
 .urn__art-sticky {
   position: sticky;
-  top: calc(var(--header-h) + 3vh);
+  top: calc(var(--header-h) + calc(3 * var(--vh)));
   display: grid;
   justify-items: center;
 }

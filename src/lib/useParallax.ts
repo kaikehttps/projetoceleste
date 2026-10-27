@@ -20,7 +20,9 @@ export function useParallax(ref: RefObject<HTMLElement | null>, layers: Parallax
     const update = () => {
       frame = 0
       const r = root.getBoundingClientRect()
-      const y = Math.round(Math.max(0, Math.min(r.height, -r.top)))
+      // a rolagem é medida em pixels da tela; as camadas se movem em pixels do site (escala de 75% em telas grandes)
+      const scale = parseFloat(getComputedStyle(document.documentElement).zoom) || 1
+      const y = Math.round(Math.max(0, Math.min(r.height, -r.top)) / scale)
       if (y === lastY) return
       lastY = y
       for (const n of nodes) {

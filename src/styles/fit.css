@@ -4,9 +4,10 @@
  * (altura da janela menos o cabeçalho), escalando pela altura (vh).
  * O resto do site e o celular mantêm o layout normal.
  */
-@media (min-width: 1100px) and (min-height: 600px) {
+@media (min-width: 1100px) and (max-width: 1499px) and (min-height: 600px),
+  (min-width: 1500px) and (min-height: 450px) {
   :root {
-    --fit: calc(100svh - 76px);
+    --fit: calc(calc(100 * var(--svh)) - 76px);
   }
 
   /* ═════════ Dossiê: texto à esquerda, microfone e gravação à direita ═════════ */
@@ -26,19 +27,19 @@
   .dossier__sheet {
     display: grid;
     grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-    column-gap: clamp(2rem, 4vw, 3.6rem);
-    row-gap: 1.7vh;
+    column-gap: clamp(2rem, calc(4 * var(--vw)), 3.6rem);
+    row-gap: calc(1.7 * var(--vh));
     align-content: start;
-    padding: clamp(1.1rem, 3.2vh, 2.2rem) clamp(1.6rem, 3.4vw, 3.2rem);
+    padding: clamp(1.1rem, calc(3.2 * var(--vh)), 2.2rem) clamp(1.6rem, calc(3.4 * var(--vw)), 3.2rem);
   }
 
   .dossier__top {
     grid-column: 1 / -1;
-    padding-bottom: 1vh;
+    padding-bottom: calc(1 * var(--vh));
   }
 
   .dossier__stamp {
-    top: clamp(3.6rem, 8.5vh, 5.4rem);
+    top: clamp(3.6rem, calc(8.5 * var(--vh)), 5.4rem);
     right: auto;
     left: 63%;
     transform: rotate(-6deg);
@@ -50,7 +51,7 @@
     align-self: end;
     max-width: none;
     margin: 0;
-    font-size: min(var(--fs-h1), 8.6vh);
+    font-size: min(var(--fs-h1), calc(8.6 * var(--vh)));
   }
 
   .dossier__cols {
@@ -68,7 +69,7 @@
 
   .dossier__mic {
     width: auto;
-    height: min(15vh, 150px);
+    height: min(calc(15 * var(--vh)), 150px);
   }
 
   .dossier__fig figcaption {
@@ -78,8 +79,8 @@
   .dossier__text {
     grid-column: 1;
     grid-row: 3;
-    gap: 1.4vh;
-    font-size: clamp(0.98rem, 2.05vh, 1.16rem);
+    gap: calc(1.4 * var(--vh));
+    font-size: clamp(0.98rem, calc(2.05 * var(--vh)), 1.16rem);
     line-height: 1.56;
   }
 
@@ -91,7 +92,7 @@
     grid-column: 2;
     grid-row: 3;
     align-self: start;
-    gap: 1.2vh;
+    gap: calc(1.2 * var(--vh));
     margin: 0;
     padding: 0;
     border-top: 0;
@@ -103,7 +104,7 @@
   }
 
   .dossier__audio-note {
-    font-size: clamp(0.92rem, 1.9vh, 1rem);
+    font-size: clamp(0.92rem, calc(1.9 * var(--vh)), 1rem);
   }
 
   .dossier__audio .vp {
@@ -115,13 +116,12 @@
 
   .dossier__sign {
     grid-column: 1 / -1;
-    margin-top: 0.4vh;
+    margin-top: calc(0.4 * var(--vh));
   }
-
 
   /* ═════════ Urna: texto | urna | player ═════════ */
   .urn {
-    --urn-title-h: calc(19px + 15vh);
+    --urn-title-h: calc(19px + calc(15 * var(--vh)));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,21 +130,21 @@
   }
 
   .urn__title {
-    margin-top: 1vh;
-    font-size: min(11vw, 14vh);
+    margin-top: calc(1 * var(--vh));
+    font-size: min(calc(11 * var(--vw)), calc(14 * var(--vh)));
   }
 
   .urn__grid {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.7fr) minmax(0, 1.2fr);
-    column-gap: clamp(1.6rem, 3vw, 3rem);
-    margin-top: 0.4vh;
+    column-gap: clamp(1.6rem, calc(3 * var(--vw)), 3rem);
+    margin-top: calc(0.4 * var(--vh));
     align-items: center;
   }
 
   .urn__intro {
     grid-column: 1;
     grid-row: 1;
-    gap: 1.8vh;
+    gap: calc(1.8 * var(--vh));
     padding-top: 0;
   }
 
@@ -169,11 +169,11 @@
   .urn__art svg {
     width: auto;
     max-width: 100%;
-    height: min(calc(var(--fit) - 2.5rem - var(--urn-title-h) - 3vh), 64vh);
+    height: min(calc(var(--fit) - 2.5rem - var(--urn-title-h) - calc(3 * var(--vh))), calc(64 * var(--vh)));
   }
 
   .urn__pt {
-    font-size: min(3.3rem, 5.4vh);
+    font-size: min(3.3rem, calc(5.4 * var(--vh)));
   }
 
   .urn__aka {
@@ -181,15 +181,15 @@
   }
 
   .urn__tagline {
-    font-size: min(1.6rem, 3.2vh);
+    font-size: min(1.6rem, calc(3.2 * var(--vh)));
   }
 
   .urn__tagline::before {
-    margin-bottom: 0.8vh;
+    margin-bottom: calc(0.8 * var(--vh));
   }
 
   .urn__desc {
-    font-size: clamp(1rem, 2.1vh, 1.15rem);
+    font-size: clamp(1rem, calc(2.1 * var(--vh)), 1.15rem);
     line-height: 1.55;
   }
 
@@ -199,11 +199,7 @@
   }
 
   .urn__quote p {
-    font-size: min(1.15rem, 2.4vh);
-  }
-
-  .urn__listen .collection {
-    gap: 1.2vh;
+    font-size: min(1.15rem, calc(2.4 * var(--vh)));
   }
 
   .urn__listen .vp {
@@ -228,35 +224,13 @@
     font-size: 0.9rem;
   }
 
-  .urn__listen .collection__head {
-    padding: 0.7rem 1rem;
-  }
-
-  .urn__listen .collection__item {
-    min-height: 0;
-    padding: 0.45rem 1rem;
-  }
-
-  .urn__listen .collection__title {
-    font-size: 1.1rem;
-  }
-
 }
 
 /* janelas largas porém baixas: corta o que é só enfeite para caber */
-@media (min-width: 1100px) and (min-height: 600px) and (max-height: 920px) {
-  .urn__listen .collection__sub,
+@media (min-width: 1100px) and (max-width: 1499px) and (min-height: 600px) and (max-height: 920px),
+  (min-width: 1500px) and (min-height: 450px) and (max-height: 690px) {
   .urn__listen .vp__head {
     display: none;
-  }
-
-  .urn__listen .collection__item {
-    padding-block: 0.28rem;
-  }
-
-  .urn__listen .collection__state {
-    width: 30px;
-    height: 30px;
   }
 
   .urn__listen .vp {
@@ -271,40 +245,42 @@
   }
 }
 
-@media (min-width: 1100px) and (min-height: 600px) and (max-height: 820px) {
+@media (min-width: 1100px) and (max-width: 1499px) and (min-height: 600px) and (max-height: 820px),
+  (min-width: 1500px) and (min-height: 450px) and (max-height: 615px) {
   .urn__quote {
     display: none;
   }
 }
 
-@media (min-width: 1100px) and (min-height: 600px) and (max-height: 760px) {
+@media (min-width: 1100px) and (max-width: 1499px) and (min-height: 600px) and (max-height: 760px),
+  (min-width: 1500px) and (min-height: 450px) and (max-height: 570px) {
   .dossier__sheet {
-    row-gap: 1.1vh;
+    row-gap: calc(1.1 * var(--vh));
   }
 
   .dossier__title {
-    font-size: min(var(--fs-h1), 7.6vh);
+    font-size: min(var(--fs-h1), calc(7.6 * var(--vh)));
   }
 
   .dossier__text {
-    gap: 1vh;
+    gap: calc(1 * var(--vh));
     line-height: 1.44;
   }
 
   .dossier__top {
-    padding-bottom: 0.6vh;
+    padding-bottom: calc(0.6 * var(--vh));
   }
 
   .urn__title {
-    font-size: min(11vw, 11.5vh);
+    font-size: min(calc(11 * var(--vw)), calc(11.5 * var(--vh)));
   }
 
   .urn {
-    --urn-title-h: calc(19px + 12.5vh);
+    --urn-title-h: calc(19px + calc(12.5 * var(--vh)));
   }
 
   .urn__intro {
-    gap: 1.2vh;
+    gap: calc(1.2 * var(--vh));
   }
 
   .urn,
@@ -313,12 +289,12 @@
   }
 }
 
-@media (min-width: 1100px) and (min-height: 600px) and (max-height: 700px) {
+@media (min-width: 1100px) and (max-width: 1499px) and (min-height: 600px) and (max-height: 700px),
+  (min-width: 1500px) and (min-height: 450px) and (max-height: 525px) {
   .urn__desc,
   .dossier__audio-note,
   .dossier__fig,
-  .urn__listen .vp__chapters,
-  .urn__listen .collection__head {
+  .urn__listen .vp__chapters {
     display: none;
   }
 }

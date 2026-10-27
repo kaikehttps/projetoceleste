@@ -1,5 +1,6 @@
 /**
- * Prepara as gravações originais de "TESTE DUBLAGEM/" para a web:
+ * Prepara os áudios de "TESTE DUBLAGEM/" para a web. Hoje são as falas originais
+ * do próprio jogo (Deadlock, © Valve) do Vendedor e da Urna.
  *
  *  1. Copia cada arquivo para public/audio/ com um nome limpo para URL.
  *     O arquivo é remuxado com `-c copy -movflags +faststart`: o áudio fica
@@ -24,20 +25,11 @@ const OUT_DIR = join(ROOT, 'public', 'audio')
 const DATA_FILE = join(ROOT, 'src', 'data', 'audio-analysis.json')
 const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg'
 
-// Arquivo original → nome publicado. A identificação foi conferida ouvindo
-// (transcrevendo) o conteúdo de cada gravação, não só pelo nome do arquivo.
-// "Recording (2).m4a" ficou de fora: contém apenas um "Oi!" de teste.
+// Arquivo original → nome publicado. A identificação foi conferida transcrevendo
+// o conteúdo de cada arquivo, não só pelo nome.
 const FILES = {
-  'MEAPRESENTANDO.m4a': 'apresentacao.m4a',
-  'vendedor.m4a': 'vendedor.m4a',
-  'Recording (5).m4a': 'urna-01.m4a',
-  'Recording (6).m4a': 'urna-02.m4a',
-  'Recording (7).m4a': 'urna-03.m4a',
-  'Recording (8).m4a': 'urna-04.m4a',
-  'Recording (9).m4a': 'urna-05.m4a',
-  'Recording (10).m4a': 'urna-06.m4a',
-  'Recording (11).m4a': 'urna-07.m4a',
-  'MEDESPEDINDO.m4a': 'despedida.m4a',
+  'shopkepper.m4a': 'vendedor.m4a',
+  'urna.m4a': 'urna.m4a',
 }
 
 const PEAK_COUNT = 240

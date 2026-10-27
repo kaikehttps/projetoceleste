@@ -5,13 +5,10 @@ import { StarField } from '../components/art/HeroArt'
 import { SkylineLayer } from '../components/art/SkylineLayer'
 import type { SkylineOptions } from '../components/art/skyline'
 import { STAR4_PATH } from '../components/art/Star4'
-import { VoicePlayer } from '../components/player/VoicePlayer'
+import { SealedPlayer } from '../components/player/SealedPlayer'
 import { site } from '../config'
-import { farewellTrack } from '../data/recordings'
 import { delay } from '../lib/style'
 import './Finale.css'
-
-const PLAYER_ID = 'despedida'
 
 const CITY: SkylineOptions = {
   seed: 88,
@@ -71,7 +68,7 @@ export function Finale() {
         </div>
 
         <div className="finale__body" data-reveal style={delay(2)}>
-          <p className="finale__thanks">Obrigado por dedicar um pouco do seu tempo para ouvir minhas interpretações.</p>
+          <p className="finale__thanks">Obrigado por dedicar um pouco do seu tempo a esta demonstração.</p>
           <p>
             Seria muito especial ter a oportunidade de conhecer melhor o Projeto Celeste e, quem sabe, colaborar com a
             equipe no futuro. E, além da voz, sou desenvolvedor: se algum dia precisarem de uma mão com programação,
@@ -82,7 +79,7 @@ export function Finale() {
         <div className="finale__side" data-reveal style={delay(3)}>
           <div className="finale__farewell">
             <p className="label">Última gravação</p>
-            <VoicePlayer id={PLAYER_ID} track={farewellTrack} label="Despedida · Kaike" variant="farewell" />
+            <SealedPlayer label="Despedida · Kaike" tone="dark" />
           </div>
 
           {(site.projectCelesteUrl || site.contacts.length > 0) && (

@@ -15,7 +15,7 @@
   top: 0;
   bottom: 0;
   z-index: 1;
-  width: 12vw;
+  width: calc(12 * var(--vw));
   pointer-events: none;
 }
 
@@ -42,7 +42,7 @@
   gap: 2.2rem;
   padding-right: 2.2rem;
   font-family: var(--font-label);
-  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  font-size: clamp(1rem, calc(1.6 * var(--vw)), 1.3rem);
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;

@@ -15,7 +15,7 @@ export function Footer() {
 
         <ul className="site-footer__meta">
           <li>Demonstração independente de fã dublagem.</li>
-          <li>Vozes em português brasileiro.</li>
+          <li>Site em português brasileiro.</li>
           <li>
             Portfólio de <strong>{site.author}</strong>.
           </li>
@@ -69,6 +69,17 @@ export function Footer() {
           ilustrações de cenário desta página são originais e não representam artes oficiais do jogo.
           {available && ' A música de fundo pertence à Valve Software.'}
         </p>
+
+        {/* Nota discreta: só aparece para quem abrir. */}
+        <details className="site-footer__note">
+          <summary>Sobre as gravações</summary>
+          <p>
+            Esta página nasceu como um teste de fã dublagem. As gravações de voz feitas por {site.author} para esse
+            teste foram retiradas e não fazem mais parte do site: os players do Vendedor e da Urna tocam as falas
+            originais do próprio jogo (Deadlock, © Valve), e os players de apresentação e despedida ficam
+            desativados, como arquivo encerrado.
+          </p>
+        </details>
       </div>
     </footer>
   )

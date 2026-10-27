@@ -1,6 +1,6 @@
 .site-footer {
   position: relative;
-  padding-block: clamp(3rem, 6vw, 4.5rem) max(2rem, env(safe-area-inset-bottom));
+  padding-block: clamp(3rem, calc(6 * var(--vw)), 4.5rem) max(2rem, env(safe-area-inset-bottom));
   border-top: 1px solid var(--line);
   background: var(--bg);
   color: var(--ink-2);
@@ -15,7 +15,7 @@
 }
 
 .site-footer__logo {
-  width: clamp(200px, 22vw, 280px);
+  width: clamp(200px, calc(22 * var(--vw)), 280px);
 }
 
 .site-footer__meta {
@@ -126,4 +126,42 @@
     grid-template-columns: 1fr;
     justify-items: start;
   }
+}
+
+/* nota escondida: parece parte do rodapé, e só abre com um clique */
+.site-footer__note {
+  max-width: 88ch;
+  margin-top: 1.1rem;
+  color: var(--ink-3);
+  font-size: 0.8rem;
+}
+
+.site-footer__note summary {
+  display: inline-block;
+  padding: 0.3rem 0;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  cursor: pointer;
+  list-style: none;
+  transition: opacity 0.2s;
+}
+
+.site-footer__note summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-footer__note summary:hover,
+.site-footer__note[open] summary {
+  opacity: 0.9;
+}
+
+.site-footer__note p {
+  margin: 0.4rem 0 0;
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--line-2);
+  line-height: 1.6;
 }

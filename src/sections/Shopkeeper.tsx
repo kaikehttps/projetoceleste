@@ -56,8 +56,8 @@ export function Shopkeeper() {
           </p>
 
           <p className="shop__desc" data-reveal style={delay(2)}>
-            Uma interpretação experimental em português brasileiro do Vendedor de Deadlock, buscando explorar sua
-            personalidade, seu humor e a maneira como ele se dirige aos diferentes personagens.
+            O Vendedor de Deadlock: a personalidade, o humor e a maneira como ele se dirige aos diferentes
+            personagens.
           </p>
 
           <div data-reveal style={delay(3)}>
@@ -66,7 +66,7 @@ export function Shopkeeper() {
               track={shopkeeperTrack}
               label="Registro Nº 001 · O Vendedor"
               variant="shop"
-              chaptersLabel="Pule para uma interação"
+              chaptersLabel="Pule para um herói"
             />
           </div>
         </div>

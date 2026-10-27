@@ -58,7 +58,7 @@
 }
 
 .shop__title {
-  margin: clamp(1rem, 2vw, 1.6rem) 0 0;
+  margin: clamp(1rem, calc(2 * var(--vw)), 1.6rem) 0 0;
   font-family: var(--font-display);
   font-weight: 800;
   line-height: 0.84;
@@ -70,7 +70,7 @@
   font-family: var(--font-serif);
   margin: 0 0 0.15em 0.08em;
   color: var(--amber);
-  font-size: clamp(1.6rem, 3.4vw, 3.2rem);
+  font-size: clamp(1.6rem, calc(3.4 * var(--vw)), 3.2rem);
   font-style: italic;
   font-weight: 500;
   text-transform: none;
@@ -83,7 +83,7 @@
 .shop__name {
   display: block;
   margin-left: -0.04em;
-  font-size: clamp(2.2rem, 11.4vw, 11.5rem);
+  font-size: clamp(2.2rem, calc(11.4 * var(--vw)), 11.5rem);
   font-variation-settings: 'opsz' 40;
   letter-spacing: -0.012em;
   background: linear-gradient(178deg, #fff6ea 30%, #f3cf9a 75%, #c98d4a 100%);
@@ -100,13 +100,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(2rem, 5vw, 5rem);
-  margin-top: clamp(1rem, 2vw, 2rem);
+  gap: clamp(2rem, calc(5 * var(--vw)), 5rem);
+  margin-top: clamp(1rem, calc(2 * var(--vw)), 2rem);
 }
 
 .shop__art {
   position: relative;
-  margin: clamp(-10rem, -10vw, -3rem) 0 0;
+  margin: clamp(-10rem, calc(-10 * var(--vw)), -3rem) 0 0;
 }
 
 .shop__art-frame {
@@ -155,7 +155,7 @@
   display: grid;
   gap: 1.5rem;
   align-self: start;
-  padding-top: clamp(0rem, 3vw, 3rem);
+  padding-top: clamp(0rem, calc(3 * var(--vw)), 3rem);
 }
 
 .shop__names {
@@ -165,7 +165,7 @@
 
 .shop__pt {
   font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 3.8vw, 3.3rem);
+  font-size: clamp(2.1rem, calc(3.8 * var(--vw)), 3.3rem);
   font-style: italic;
   font-weight: 400;
   line-height: 1;
@@ -180,7 +180,7 @@
   padding-left: 1.1rem;
   border-left: 2px solid var(--brass);
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-size: clamp(1.35rem, calc(2 * var(--vw)), 1.75rem);
   font-weight: 400;
   line-height: 1.32;
 }
@@ -258,7 +258,7 @@
   .shop__art {
     max-width: 620px;
     width: 100%;
-    margin: clamp(-5rem, -9vw, -2rem) auto 0;
+    margin: clamp(-5rem, calc(-9 * var(--vw)), -2rem) auto 0;
   }
 
   .shop__content {

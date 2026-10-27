@@ -13,19 +13,19 @@
   --font-sans: 'Instrument Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-label: 'Big Shoulders Display Variable', 'Arial Narrow', 'Roboto Condensed', sans-serif;
 
-  --fs-mega: clamp(3rem, 13.4vw, 13rem);
-  --fs-hero: clamp(3.4rem, 10vw, 9.5rem);
-  --fs-h1: clamp(2.6rem, 6.4vw, 6rem);
-  --fs-h2: clamp(2rem, 4.2vw, 3.6rem);
-  --fs-h3: clamp(1.35rem, 2.2vw, 1.8rem);
-  --fs-lead: clamp(1.25rem, 1.7vw, 1.5rem);
+  --fs-mega: clamp(3rem, calc(13.4 * var(--vw)), 13rem);
+  --fs-hero: clamp(3.4rem, calc(10 * var(--vw)), 9.5rem);
+  --fs-h1: clamp(2.6rem, calc(6.4 * var(--vw)), 6rem);
+  --fs-h2: clamp(2rem, calc(4.2 * var(--vw)), 3.6rem);
+  --fs-h3: clamp(1.35rem, calc(2.2 * var(--vw)), 1.8rem);
+  --fs-lead: clamp(1.25rem, calc(1.7 * var(--vw)), 1.5rem);
   --fs-body: 1.125rem;
   --fs-small: 1rem;
   --fs-label: 0.92rem;
 
   /* espaço e forma */
-  --gutter: clamp(1rem, 4.5vw, 4.5rem);
-  --section-y: clamp(5rem, 12vw, 10rem);
+  --gutter: clamp(1rem, calc(4.5 * var(--vw)), 4.5rem);
+  --section-y: clamp(5rem, calc(12 * var(--vw)), 10rem);
   --maxw: 1320px;
   --radius: 4px;
   --header-h: 64px;
@@ -33,6 +33,14 @@
   /* movimento */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-cine: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* unidades de janela "corrigidas pelo zoom": 1vw, 1vh… valem o normal em telas comuns.
+     Em telas grandes o site roda na escala de 75% (veja base.css) e elas compensam. */
+  --vw: 1vw;
+  --vh: 1vh;
+  --svh: 1svh;
+  --vmin: 1vmin;
+  --vmax: 1vmax;
 
   /* marca (da logo do Projeto Celeste) */
   --celeste-pink: #d88ae4;
@@ -178,4 +186,14 @@
   --urn-light: #6d5a77;
   --urn-dark: #2a1e30;
   --urn-trim: #b88a4c;
+}
+
+@media (min-width: 1500px) {
+  :root {
+    --vw: calc(1vw / 0.75);
+    --vh: calc(1vh / 0.75);
+    --svh: calc(1svh / 0.75);
+    --vmin: calc(1vmin / 0.75);
+    --vmax: calc(1vmax / 0.75);
+  }
 }
